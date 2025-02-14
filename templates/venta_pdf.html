@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de la Venta</title>
+</head>
+<body>
+    <h1>Detalles de la Venta</h1>
+    
+    <p><strong>Cliente:</strong> {{ cliente }}</p>
+    <p><strong>ID de Venta:</strong> {{ venta.idVenta }}</p>
+
+    <h2>Productos en la Venta</h2>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in detalles %}
+            <tr>
+                <td>{{ detalle.producto }}</td>
+                <td>{{ detalle.cantidad }}</td>
+                <td>{{ detalle.precio|floatformat:2 }}</td>  <!-- Mostrar precio con 2 decimales -->
+                <td>{{ detalle.total|floatformat:2 }}</td>    <!-- Mostrar total con 2 decimales -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <p><strong>Total de la Venta: </strong> {{ venta.total|floatformat:2 }}</p>
+    </div>
+</body>
+</html>
