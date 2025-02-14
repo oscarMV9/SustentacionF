@@ -1,0 +1,44 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: 0;
+}
+
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif; 
+}
+
+/* Estilos para la caja de registro */
+.box-register {
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%; /* Ancho del contenedor */
+    max-width: 400px; /* Ancho máximo */
+    text-align: center; 
+}
+
+/* Estilos para el título h2 */
+.box-register h2 {
+    color: #333333; /* Color de texto oscuro */
+    margin-bottom: 20px; /* Espaciado inferior */
+    font-size: 24px; /* Tamaño de fuente */
+}
+
+/* Estilos para el componente de registro */
+.componenteRegistro {
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en columna */
+    gap: 15px; /* Espacio entre elementos */
+}
