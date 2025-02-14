@@ -23,6 +23,7 @@ function Dashboard() {
         <div>
             <h2>Bienvenido {user?.mensaje}</h2>
             <button onClick={cerrarSesion}>Cerrar sesión</button>
+            <h1>Prueba de detalles</h1>
         </div>
     );
 }
