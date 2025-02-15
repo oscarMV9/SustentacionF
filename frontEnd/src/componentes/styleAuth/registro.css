@@ -1,42 +1,58 @@
 .registro-container {
-    max-width: 400px;
+    width: 300px;
     margin: 50px auto;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: blanchedalmond;
+    backdrop-filter: blur(20px);
+    border-radius: 8px;
+    border: solid 2px aliceblue;
+    box-shadow: 0px 0px 20px 0px rgba(245, 245, 245, 0.945);
+    text-align: center;
 }
 
 .registro-container h2 {
-    text-align: center;
-    color: #ff0000;
+    margin-bottom: 15px;
+    color: #000000;
+}
+
+.registro-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .registro-container input {
-    width: 100%;
     padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #cc2a2a00;
+    outline: none;
+    background: #817e7e52;
+    transition: border ease-in-out 1s;
+}
+
+.registro-container input:focus {
+    border-color: #1c98d1;
+    box-shadow: 0px 0px 20px 0px rgba(106, 176, 216, 0.945);
 }
 
 .registro-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
+    padding: 10px 30px;
+    background: #007bff;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 45px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
 }
 
 .registro-container button:hover {
-    background-color: #0056b3;
+    background: #0056b3;
 }
 
-p {
-    text-align: center;
+.registro-container p {
+    margin-top: 10px;
     font-size: 14px;
-    color: #666;
+    color: #555;
 }

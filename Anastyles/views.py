@@ -40,6 +40,3 @@ def index(request):
 def catalogo(request):
     return render(request, 'catalogo.html')
 
-@login_required
-def home(request):
-    return render(request, 'home.html')

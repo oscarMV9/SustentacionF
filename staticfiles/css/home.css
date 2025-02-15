@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:'Courier New', Courier, monospace;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(-45deg,#c7c7c7, #0c0c0c) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.container {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../componentes/styleAuth/login.css"
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -26,7 +27,7 @@ function Login() {
     };
 
     return (
-        <div>
+        <div className="login-container">
           <h2>Ingreso</h2>
           <form onSubmit={manejoLogin}>
             <input type="text" placeholder="Usuario" value={username} 
