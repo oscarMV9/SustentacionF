@@ -14,7 +14,7 @@ class InventarioResource(resources.ModelResource):
 @admin.register(Productos)
 class ProductosAdmin(ImportExportModelAdmin):
     resource_class = ProductosResource
-    list_display = ('id', 'idProducto', 'descripcion', 'precio')
+    list_display = ('id', 'idProducto','imagen', 'descripcion', 'precio')
     search_fields = ('descripcion',)
 
 @admin.register(Inventario)
