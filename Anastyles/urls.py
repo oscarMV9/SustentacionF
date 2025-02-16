@@ -9,8 +9,8 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name="indexesTemplates/index.html")),
-    path('registro/',TemplateView.as_view(template_name="templatesAuth/registro.html"), name='registro'),
+    path('', TemplateView.as_view(template_name="indexesTemplates/index.html"), name='index'),
+    path('registro/',TemplateView.as_view(template_name="templatesAuth/registro.html"), name='registroU'),
     path('ingreso/',TemplateView.as_view(template_name="templatesAuth/login.html"), name='login'),
     path('dashboard/',TemplateView.as_view(template_name="homeTemplates/home.html")),
     path('catalogo/', catalogo,name='catalogo'),

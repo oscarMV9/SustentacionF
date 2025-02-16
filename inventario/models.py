@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 class Productos(models.Model):
     id = models.AutoField(primary_key=True)
     idProducto = models.ForeignKey(Produccion, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='/productos', blank=True, null=False)
     descripcion = models.CharField(max_length=100)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     
