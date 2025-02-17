@@ -3,6 +3,7 @@ import Registro from "./componentes/registro";
 import Login from "./componentes/login";
 import Dashboard from "./componentes/dashboard";
 import PrivateRoute from "./componentes/privateRoute";
+import ProductosCategoria from "./componentes/ProductosCategoria";
 
 function App() {
   return (
@@ -16,9 +17,9 @@ function App() {
           </Route>
 
         <Route path="*" element={<Login />} />
+        <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
       </Routes>
     </Router>
   );
 }
-
 export default App;

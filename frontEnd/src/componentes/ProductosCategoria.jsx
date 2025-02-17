@@ -1,0 +1,49 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "../componentes/styleAuth/productosComponente.css"
+
+const ProductosCategoria = () => {
+    const { categoria } = useParams();
+    const [productos, setProductos] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch(`http://localhost:8000/api/productos/${categoria}/`)
+            .then(response => response.json())
+            .then(data => {
+                setProductos(data.productos);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error("No se pudieron cargar los productos:", error);
+                setLoading(false);
+            });
+    }, [categoria]);
+
+    if (loading) return <p>Cargando Productos...</p>;
+
+    return (
+        <div className="productContainer">
+            <h2>Productos en la categoría: {categoria}</h2>
+            <div className="productos-grid">
+                {productos.length > 0 ? (
+                    productos.map(producto => (
+                        <div key={producto.id} className="producto-card">
+                            <img src={producto.imagen} alt={producto.nombre} />
+                            <h3>{producto.nombre}</h3>
+                            <p>{producto.descripcion}</p>
+                            <p>talla: {producto.talla}</p>
+                            <p>Color: {producto.color}</p>
+                            <p>Precio: ${producto.precio}</p>
+                            <p>Stock: {producto.cantidad}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>No hay productos en esta categoría.</p>
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default ProductosCategoria;

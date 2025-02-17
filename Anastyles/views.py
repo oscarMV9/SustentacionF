@@ -1,6 +1,4 @@
-from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -26,17 +24,4 @@ def ingreso(request):
     if user:
         return Response({'mensaje': 'Bienvenido!'}, status=status.HTTP_200_OK)
     return Response({'error': 'Usuario o contraseña incorrectos'}, status=status.HTTP_400_BAD_REQUEST)
-    
-def indexx(request):
-    return render(request, "index.html")
-
-# aqui esta el registro
-def registro(request):
-    return render(request, "templatesAuth/registro.html")
-
-def index(request):
-    return render(request, 'index.html')
-
-def catalogo(request):
-    return render(request, 'catalogo.html')
 

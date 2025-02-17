@@ -42,6 +42,7 @@ class Inventario(models.Model):
         
     def __str__(self):
         return f"{self.descripcion} - {self.idProducto.get_nombre_producto()} - {self.cantidades} unidades"
+    
 
 
  

@@ -4,8 +4,6 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
-from .views import catalogo,indexx
-from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,8 +11,9 @@ urlpatterns = [
     path('registro/',TemplateView.as_view(template_name="templatesAuth/registro.html"), name='registroU'),
     path('ingreso/',TemplateView.as_view(template_name="templatesAuth/login.html"), name='login'),
     path('dashboard/',TemplateView.as_view(template_name="homeTemplates/home.html")),
-    path('catalogo/', catalogo,name='catalogo'),
+    path('api/',include('inventario.urls')),
     path('api/usuarios/', include('users.urls')),
+    path('productos/<str:categoria>/', TemplateView.as_view(template_name='homeTemplates/productos.html'), name='productos'),
     path('invetario/', include('inventario.urls')),
     path('produccion/', include('produccion.urls')),
     path('ventas/', include('ventas.urls')),

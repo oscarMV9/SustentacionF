@@ -29,7 +29,6 @@ INSTALLED_APPS = [
 ]
 
 JAZZMIN_SETTINGS = {
-    #"site_logo": "/imagenes/vicio.png",
     "site_logo": "/imagenes/AnaStyle.png",
     "welcome_sign": "Bienvenido al panel de admin :)))",
     "theme": "darkly",
@@ -58,6 +57,9 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+
 ]
 
 ROOT_URLCONF = 'Anastyles.urls'
