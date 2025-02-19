@@ -37,7 +37,7 @@ class Inventario(models.Model):
             categoriaColor=self.categoriaColor,
             categoriaPrenda=self.categoriaPrenda,
             categoriaGenero=self.categoriaGenero,
-        ).exists():
+        ).exclude(id=self.id).exists():
             raise ValidationError("el registro ya existe en el inventario")
         
     def __str__(self):

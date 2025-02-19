@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'ventas',
     'Categorias',
     'logistica',
+    'carrito',
 ]
 
 JAZZMIN_SETTINGS = {
