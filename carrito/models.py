@@ -1,20 +1,24 @@
 from django.db import models
-from django.contrib.auth.models import User
 from inventario.models import Inventario
 from django.core.exceptions import ValidationError
 from django.db import transaction
 
-class Carrito(models.Model): 
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+class Carrito(models.Model):
+    session_id = models.CharField(max_length=255, unique=True)
     horaCreacion = models.DateTimeField(auto_now_add=True)
 
-    def procesar_compra(self):
+    def procesar_compra(self, nombre_cliente, telefono, direccion):
         with transaction.atomic():
             if not CarritoItem.objects.filter(carrito=self).exists():
                 raise ValidationError("El carrito está vacío. Agrega productos antes de procesar la compra.")
 
             total = 0
-            nueva_orden = Orden.objects.create(usuario=self.usuario, total=0)
+            nueva_orden = Orden.objects.create(
+                nombre_cliente=nombre_cliente,
+                telefono=telefono,
+                direccion=direccion,
+                total=0
+            )
 
             for item in CarritoItem.objects.filter(carrito=self):
                 if item.cantidad > item.producto.cantidades:
@@ -38,17 +42,19 @@ class Carrito(models.Model):
             CarritoItem.objects.filter(carrito=self).delete()
 
     def __str__(self):
-        return f"Carrito de {self.usuario.username}"
-    
+        return f"Carrito de sesión {self.session_id}"
+
 
 class Orden(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    nombre_cliente = models.CharField(max_length=255) 
+    telefono = models.CharField(max_length=15)
+    direccion = models.TextField(max_length=50)
     fecha = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"Orden {self.id}, {self.usuario.username}"
-    
+        return f"Orden {self.id} - Cliente: {self.nombre_cliente}"
+
 
 class OrdenItem(models.Model):
     orden = models.ForeignKey(Orden, on_delete=models.CASCADE, related_name="items")
@@ -58,7 +64,7 @@ class OrdenItem(models.Model):
 
     def __str__(self):
         return f"{self.cantidad}x {self.producto.idProducto.get_nombre_producto()} - {self.precio_unitario} c/u"
-    
+
 
 class CarritoItem(models.Model):
     carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE, related_name="items")
