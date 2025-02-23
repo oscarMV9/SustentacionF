@@ -11,10 +11,11 @@ urlpatterns = [
     path('registro/',TemplateView.as_view(template_name="templatesAuth/registro.html"), name='registroU'),
     path('ingreso/',TemplateView.as_view(template_name="templatesAuth/login.html"), name='login'),
     path('dashboard/',TemplateView.as_view(template_name="homeTemplates/home.html")),
+    path('carrito/',TemplateView.as_view(template_name="homeTemplates/carrito.html")),
     path('api/',include('inventario.urls')),
     path('api/usuarios/', include('users.urls')),
     path('productos/<str:categoria>/', TemplateView.as_view(template_name='homeTemplates/productos.html'), name='productos'),
-    path('invetario/', include('inventario.urls')),
+    path('inven tario/', include('inventario.urls')),
     path('produccion/', include('produccion.urls')),
     path('ventas/', include('ventas.urls')),
 ] + static(settings.STATIC_URL, document_root=os.path.join(settings.BASE_DIR, 'frontEnd', 'dist', 'assets'))

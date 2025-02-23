@@ -4,6 +4,8 @@ import Login from "./componentes/login";
 import Dashboard from "./componentes/dashboard";
 import PrivateRoute from "./componentes/privateRoute";
 import ProductosCategoria from "./componentes/ProductosCategoria";
+import Carrito from "./componentes/carrito";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
   return (
@@ -16,8 +18,9 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
           </Route>
 
-        <Route path="*" element={<Login />} />
-        <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
+          <Route path="*" element={<Login />} />
+          <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
+          <Route path="/carrito" element={<Carrito/>}/>
       </Routes>
     </Router>
   );

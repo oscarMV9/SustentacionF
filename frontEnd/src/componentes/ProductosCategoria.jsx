@@ -20,6 +20,20 @@ const ProductosCategoria = () => {
             });
     }, [categoria]);
 
+    const agregarCarrito = (producto) => {
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        let productoExistente = carrito.find(item => item.id === producto.id);
+
+        if (productoExistente) {
+            productoExistente.cantidad += 1;
+        } else {
+            carrito.push({ ...producto,cantidad:1 });
+        }
+
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        alert(`${producto.nombre} agregado al carrito`)
+    };
+
     if (loading) return <p>Cargando Productos...</p>;
 
     return (
@@ -36,6 +50,7 @@ const ProductosCategoria = () => {
                             <p>Color: {producto.color}</p>
                             <p>Precio: ${producto.precio}</p>
                             <p>Stock: {producto.cantidad}</p>
+                            <button onClick={() => agregarCarrito(producto)}>Agregar al carrito</button>
                         </div>
                     ))
                 ) : (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../componentes/styleAuth/home.css";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
     const [user, setUser] = useState(null);
@@ -24,8 +25,11 @@ function Dashboard() {
 
     return (
         <div className="header">
-            <h2>{user?.mensaje}</h2>
+            <h2 className="messaje_title">{user?.mensaje}</h2>
             <nav className="navbar-nav">
+                <Link to="/carrito">
+                    <button className="boton-carrito">Ver Carrito</button>
+                </Link>
                 <a onClick={cerrarSesion}>Cerrar sesión</a>
             </nav>
         </div>
