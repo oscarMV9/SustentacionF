@@ -14,13 +14,14 @@ function Dashboard() {
             console.log("usuario Encontrado" + storedUser);
             setUser(JSON.parse(storedUser));
         } else {
-            navigate("/ingreso");
+            navigate("/formAuth");
         }
     }, [navigate]);
 
     const cerrarSesion = () => {
         localStorage.removeItem("user");
-        navigate("/ingreso");
+        localStorage.removeItem("carrito");
+        navigate("/formAuth");
     };
 
     return (

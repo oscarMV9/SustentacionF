@@ -21,11 +21,13 @@ const ProductosCategoria = () => {
     }, [categoria]);
 
     const agregarCarrito = (producto) => {
+
         let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
         let productoExistente = carrito.find(item => item.id === producto.id);
 
         if (productoExistente) {
-            productoExistente.cantidad += 1;
+            alert("Este producto ya está en el carrito");
+            return;
         } else {
             carrito.push({ ...producto,cantidad:1 });
         }
@@ -50,7 +52,12 @@ const ProductosCategoria = () => {
                             <p>Color: {producto.color}</p>
                             <p>Precio: ${producto.precio}</p>
                             <p>Stock: {producto.cantidad}</p>
-                            <button onClick={() => agregarCarrito(producto)}>Agregar al carrito</button>
+                            <button
+                             onClick={() => agregarCarrito(producto)}
+                             disabled={producto.cantidad <= 0}
+                             >
+                                {producto.cantidad <= 0 ? "Sin Stock" : "Agregar al Carrito"}
+                             </button>
                         </div>
                     ))
                 ) : (

@@ -1,0 +1,22 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Hace que el contenedor ocupe toda la altura de la pantalla */
+    background-color: #f0f0f0; /* Color de fondo opcional */
+}
+
+#root {
+    width: 100%;
+    max-width: 1200px; /* Ancho máximo opcional */
+    padding: 20px; /* Espaciado interno opcional */
+    background-color: #fff; /* Color de fondo opcional */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+    border-radius: 8px; /* Bordes redondeados opcional */
+}

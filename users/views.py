@@ -12,8 +12,8 @@ def registro(request):
         email = data.get('email')
         password = data.get('password')
 
-        if User.objects.filter(username=username).exists():
-            return JsonResponse({'error': 'Lo siento el usuario ya existe!'}, status=400)
+        if User.objects.filter(email=email).exists():
+            return JsonResponse({'error': 'este correo ya esta registrado'}, status=400)
 
         user = User.objects.create_user(username=username, email=email, password=password)
         return JsonResponse({'mensaje':'Usuario creado, bienvenido!'},status=201)
@@ -22,9 +22,15 @@ def registro(request):
 def ingreso(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        username = data.get('username')
+        email = data.get('email')
         password = data.get('password')
 
+        try:
+            user = User.objects.get(email=email)
+            username = user.username
+        except User.DoesNotExist:
+            return JsonResponse({'error': 'Ups!, verifique sus credenciales...'}, status=400)
+        
         user = authenticate(username=username, password=password)
 
         if user:
@@ -33,5 +39,5 @@ def ingreso(request):
         else:
             return JsonResponse({'error': 'Ups!, verifique sus credenciales...'}, status=400)
     
-    return JsonResponse({'error':'El metodo no funciona o algo mas!, intenta de nuevc'})
+    return JsonResponse({'error':'El metodo no funciona o algo mas!, intenta de nuevo'})
 

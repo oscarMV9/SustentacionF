@@ -4,7 +4,6 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 
-# vista de registro y login
 @api_view(['POST'])
 def registro(request):
     username = request.data.get('username')

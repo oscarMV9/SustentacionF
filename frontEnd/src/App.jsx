@@ -1,26 +1,21 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
-import Registro from "./componentes/registro";
-import Login from "./componentes/login";
 import Dashboard from "./componentes/dashboard";
 import PrivateRoute from "./componentes/privateRoute";
 import ProductosCategoria from "./componentes/ProductosCategoria";
 import Carrito from "./componentes/carrito";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import AuthForm from "./componentes/AuthForm";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/registro" element={<Registro />} />
-          <Route path="/ingreso" element={<Login />} />
-          
+          <Route path="/formAuth" element={<AuthForm/>}/>
           <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
+              <Route path="/carrito" element={<Carrito/>}/>
           </Route>
-
-          <Route path="*" element={<Login />} />
-          <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
-          <Route path="/carrito" element={<Carrito/>}/>
       </Routes>
     </Router>
   );
