@@ -15,6 +15,7 @@ function App() {
           <Route path="/formAuth" element={<AuthForm/>}/>
           <Route element={<PrivateRoute />}>
             <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
+            <Route path="/productos/genero/:genero" element={<ProductosCategoria/>}/>
             <Route path="/carrito" element={<Carrito/>}/>
             <Route path="/dashboard" element={<DashboardPage/>}/>
           </Route>

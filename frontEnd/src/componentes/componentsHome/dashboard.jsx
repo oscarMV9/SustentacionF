@@ -35,6 +35,9 @@ function Dashboard() {
                     <Link to="/carrito" className="link-carrito">
                         <button className="boton-carrito">Ver Carrito</button>
                     </Link>
+                    <Link to="/productos/genero/hombre" className="link-genero">
+                        <button className="boton-carrito">Hombre</button>
+                    </Link>
                     <a onClick={cerrarSesion} className="cerrar-session">Cerrar sesión</a>
                 </nav>
             </div>
