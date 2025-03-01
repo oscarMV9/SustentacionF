@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../componentes/styleAuth/formAuth.css";
+import "../componentAuth/formAuth.css";
 
 function AuthForm() {
     const [username, setUsername] = useState("");

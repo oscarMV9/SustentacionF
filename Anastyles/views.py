@@ -23,4 +23,4 @@ def ingreso(request):
     if user:
         return Response({'mensaje': 'Bienvenido!'}, status=status.HTTP_200_OK)
     return Response({'error': 'Usuario o contraseña incorrectos'}, status=status.HTTP_400_BAD_REQUEST)
-
+                                            

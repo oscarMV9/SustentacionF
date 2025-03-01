@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "../componentes/styleAuth/productosComponente.css"
+import Dashboard from "./dashboard";
+import "./productos.css";
 
 const ProductosCategoria = () => {
     const { categoria } = useParams();
@@ -39,23 +40,22 @@ const ProductosCategoria = () => {
     if (loading) return <p>Cargando Productos...</p>;
 
     return (
-        <div className="productContainer">
-            <h2>Productos en la categoría: {categoria}</h2>
-            <div className="productos-grid">
+        <>
+        <Dashboard/>
+        <section className="contenedor">
+            <div className="contenedor-items">
                 {productos.length > 0 ? (
                     productos.map(producto => (
-                        <div key={producto.id} className="producto-card">
-                            <img src={producto.imagen} alt={producto.nombre} />
-                            <h3>{producto.nombre}</h3>
-                            <p>{producto.descripcion}</p>
+                        <div key={producto.id} className="item">
+                            <span>{producto.nombre}</span>
+                            <img src={producto.imagen} alt={producto.nombre} width="150px" height="200px"/>
                             <p>talla: {producto.talla}</p>
                             <p>Color: {producto.color}</p>
                             <p>Precio: ${producto.precio}</p>
                             <p>Stock: {producto.cantidad}</p>
                             <button
                              onClick={() => agregarCarrito(producto)}
-                             disabled={producto.cantidad <= 0}
-                             >
+                             disabled={producto.cantidad <= 0} className="boton-item">
                                 {producto.cantidad <= 0 ? "Sin Stock" : "Agregar al Carrito"}
                              </button>
                         </div>
@@ -64,7 +64,8 @@ const ProductosCategoria = () => {
                     <p>No hay productos en esta categoría.</p>
                 )}
             </div>
-        </div>
+        </section>
+    </>
     );
 };
 

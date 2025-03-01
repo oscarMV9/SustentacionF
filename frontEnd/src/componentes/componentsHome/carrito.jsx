@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../componentes/styleAuth/carrito.css";
+import Dashboard from "./dashboard";
+import "../componentsHome/carrito.css";
 
 function Carrito() {
     const [carrito, setCarrito] = useState([]);
@@ -32,12 +33,14 @@ function Carrito() {
     };
 
     return (
+        <>
+        <Dashboard/>
         <div className="carrito">
             <div className="header-carrito">
                 <h2 className="">Carrito de Compras</h2>
             </div>
         {carrito.length > 0 ? (
-            <>
+            <>                  
                 <div className="carrito-items">
                     {carrito.map((item) => (
                         <div key={item.id} className="carrito-item">
@@ -64,7 +67,8 @@ function Carrito() {
         ) : (
             <p>Tu carrito está vacío.</p>
         )}
-    </div>
+        </div>
+        </>
     );
 }
 

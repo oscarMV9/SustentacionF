@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Lexend+Giga:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:"Poppins";
+}
+
+body {
+    min-height: 100vh;
+    background: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)), 
+    url('../../assets/imagenes/sala.jpg') no-repeat center center fixed;  
+    background-size: cover;
+    background-position: center;
+}
+
+.contenedor{
+    max-width: 1200px;
+    padding: 10px;
+    margin: 60px 60px;
+    display: flex;
+    justify-content: space-between;
+    contain: paint;
+}
+
+.contenedor .contenedor-items{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-gap:10px;
+    grid-row-gap: 30px;
+    width: 100%;
+    transition: .3s;
+}
+.contenedor .contenedor-items .item{
+    max-width: 200px;
+    margin: auto;
+    border: 1px solid #666;
+    color: #000;
+    background-color: azure;
+    border-radius: 10px;
+    padding: 20px;
+    transition: .3s;
+}
+
+.contenedor .contenedor-items .item:hover{
+    box-shadow: 0 0 10px #666;
+    scale: 1.05;
+}
+
+.contenedor .contenedor-items .item img{
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.contenedor .contenedor-items .item .titulo-item{
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+.contenedor .contenedor-items .item .precio-item{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.contenedor .contenedor-items .item .boton-item{
+    display: block;
+    margin: 10px auto;
+    border: none;
+    text-decoration: none;
+    background-color: black;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
