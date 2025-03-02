@@ -7,6 +7,7 @@ const ProductosCategoria = () => {
     const { categoria, genero } = useParams();
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         let url = `http://localhost:8000/api/productos/${categoria}/`;
@@ -17,11 +18,18 @@ const ProductosCategoria = () => {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                setProductos(data.productos);
+                if (data.error) {
+                    setError(data.error);
+                    setProductos([]);
+                } else {
+                    setProductos(data.productos);
+                    setError(null);
+                }
                 setLoading(false);
             })
             .catch(error => {
                 console.error("No se pudieron cargar los productos:", error);
+                setError("No se pudieron cargar los productos");
                 setLoading(false);
             });
     }, [categoria, genero]);
@@ -48,26 +56,30 @@ const ProductosCategoria = () => {
             <Dashboard />
             <section className="contenedor">
                 <div className="contenedor-items">
-                    {productos.length > 0 ? (
-                        productos.map(producto => (
-                            <div key={producto.id} className="item">
-                                <span>{producto.nombre}</span>
-                                <img src={`http://127.0.0.1:8000${producto.imagen}`} alt={producto.nombre} width="150px" height="200px" />
-                                <p>Talla: {producto.talla}</p>
-                                <p>Color: {producto.color}</p>
-                                <p>Precio: ${producto.precio}</p>
-                                <p>Stock: {producto.cantidad}</p>
-                                <button
-                                    onClick={() => agregarCarrito(producto)}
-                                    disabled={producto.cantidad <= 0}
-                                    className="boton-item"
-                                >
-                                    {producto.cantidad <= 0 ? "Sin Stock" : "Agregar al Carrito"}
-                                </button>
-                            </div>
-                        ))
+                    {error ? (
+                        <p>{error}</p>
                     ) : (
-                        <p>No hay productos en esta categoría.</p>
+                        productos.length > 0 ? (
+                            productos.map(producto => (
+                                <div key={producto.id} className="item">
+                                    <span>{producto.nombre}</span>
+                                    <img src={`http://127.0.0.1:8000${producto.imagen}`} alt={producto.nombre} width="150px" height="200px" />
+                                    <p>Talla: {producto.talla}</p>
+                                    <p>Color: {producto.color}</p>
+                                    <p>Precio: ${producto.precio}</p>
+                                    <p>Stock: {producto.cantidad}</p>
+                                    <button
+                                        onClick={() => agregarCarrito(producto)}
+                                        disabled={producto.cantidad <= 0}
+                                        className="boton-item"
+                                    >
+                                        {producto.cantidad <= 0 ? "Sin Stock" : "Agregar al Carrito"}
+                                    </button>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No hay productos en esta categoría.</p>
+                        )
                     )}
                 </div>
             </section>

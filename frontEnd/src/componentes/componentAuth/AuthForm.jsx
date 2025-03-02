@@ -50,6 +50,11 @@ function AuthForm() {
             });
             localStorage.setItem("user", JSON.stringify(response.data));
             setMessage(response.data.mensaje);
+            if (response.data.is_admin) {
+                window.location.href = "http://127.0.0.1:8000/admin/";
+            } else {
+                setTimeout(() => navigate("/dashboard"), 1500);
+            }
             setTimeout(() => navigate("/dashboard"), 1500);
         } catch (error) {
             setMessage(error.response?.data?.error || "Lo siento, hubo un error.. intenta de nuevo");

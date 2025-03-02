@@ -38,6 +38,9 @@ function Dashboard() {
                     <Link to="/productos/genero/hombre" className="link-genero">
                         <button className="boton-carrito">Hombre</button>
                     </Link>
+                    <Link to="/productos/genero/mujer" className="link-genero">
+                        <button className="boton-carrito">Mujer</button>
+                    </Link>
                     <a onClick={cerrarSesion} className="cerrar-session">Cerrar sesión</a>
                 </nav>
             </div>
