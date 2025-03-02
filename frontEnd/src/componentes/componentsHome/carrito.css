@@ -1,24 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&family=Titillium+Web:wght@200;300;400;600;700&display=swap');
 .carrito{
-    border: 1px solid #666;
+    border: 2px solid #e0dbdb;
     margin-top: 30px;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: auto;
+    box-shadow: 0 0 10px #666;
     position: sticky !important;
-    top: 0;
+    margin: 20%;
     transition: .3s;
 }
 .carrito .header-carrito{
-    background-color: #000;
+    background-color: #353333;
     color: #fff;
     text-align: center;
-    padding: 30px 0;
+    border-bottom: 2px solid #ffffff;
+    padding: 20px 0;
 }
 .carrito .carrito-item{
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
+    background-color: rgb(88, 88, 88);
     position: relative;
     border-bottom: 1px solid #666;
     padding: 20px;
@@ -33,7 +35,7 @@
     text-transform: uppercase;
 }
 .carrito .carrito-item .selector-cantidad{
-    display: inline-block;
+    display: flex;
     margin-right: 25px;
 }
 .carrito .carrito-item .carrito-item-cantidad{
@@ -49,7 +51,9 @@
     font-size: 18px;
     width: 32px;
     height: 32px;
+    color: #000;
     line-height: 32px;
+    background-color: #e0dbdb;
     text-align: center;
     border-radius: 50%;
     border: 1px solid #000;
@@ -80,4 +84,35 @@
 }
 .carrito .carrito-item .btn-eliminar i{
     pointer-events: none;
+}
+
+.carrito-total{
+    background-color: #666;
+    padding: 30px;
+}
+.carrito-total .fila{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.carrito-total .btn-pagar{
+    display: block;
+    width: 100%;
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: .3s;
+}
+.carrito-total .btn-pagar:hover{
+    scale: 1.05;
 }

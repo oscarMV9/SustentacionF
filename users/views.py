@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -35,9 +36,16 @@ def ingreso(request):
 
         if user:
             login(request, user)
-            return JsonResponse({'mensaje': f'Bienvenido {username}'}, status=200)
+            return JsonResponse({
+                'mensaje': f'Bienvenido {username}',
+                'is_admin': user.is_staff
+                }, status=200)
         else:
             return JsonResponse({'error': 'Ups!, verifique sus credenciales...'}, status=400)
     
     return JsonResponse({'error':'El metodo no funciona o algo mas!, intenta de nuevo'})
 
+@csrf_exempt
+def logout(request):
+    logout(request)
+    return redirect ("http://localhost:5173/formAuth")
