@@ -60,7 +60,21 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:8000",
     "http://localhost:8000",
+    "https://9vtnjg7h-5173.use2.devtunnels.ms",  
+    "https://9vtnjg7h-8000.use2.devtunnels.ms",
 
+]
+
+CORS_ALLOW_ALL_ORIGINS = True 
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+CORS_ALLOW_HEADERS = ["*"]
+
+ALLOWED_HOSTS = [
+    "9vtnjg7h-5173.use2.devtunnels.ms",
+    "9vtnjg7h-8000.use2.devtunnels.ms",  
+    "localhost",
+    "127.0.0.1",
 ]
 
 ROOT_URLCONF = 'Anastyles.urls'
@@ -82,6 +96,13 @@ TEMPLATES = [
         },
     },
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'oscarmontoya119@gmail.com'
+EMAIL_HOST_PASSWORD = 'nathalyteamo12'
 
 WSGI_APPLICATION = 'Anastyles.wsgi.application'
 
@@ -107,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'http://localhost:5173/formAuth'
 
 
 LANGUAGE_CODE = 'es'

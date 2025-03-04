@@ -21,9 +21,8 @@ class CategoriaTalla(models.Model):
     talla = models.CharField(max_length=12)
 
     def clean(self):
-        # Validación: Calzado debe ser una talla válida de calzado
-        calzado_tallas = [str(i) for i in range(34, 49)]  # Generar la lista de tallas de calzado
-        tallas_prenda = ['S', 'M', 'L', 'XL', 'XS', 'UNICA']  # Tallas para prendas
+        calzado_tallas = [str(i) for i in range(34, 49)] 
+        tallas_prenda = ['S', 'M', 'L', 'XL', 'XS', 'UNICA'] 
 
         if self.tipoTalla == 'CALZADO' and self.talla not in calzado_tallas:
             raise ValidationError("La talla no es válida según el tipo de prenda [Calzado].")

@@ -1,0 +1,101 @@
+.checkout {
+    max-width: 100%;
+    margin: 70px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.text-pagar {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.items-form {
+    display: flex;
+    gap: 20px;
+}
+
+.checkout-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.checkout-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.checkout-item img {
+    border-radius: 4px;
+}
+
+.checkout-item span {
+    flex: 1;
+    color: #333;
+}
+
+.checkout-total {
+    text-align: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 25%;
+}
+
+form div {
+    display: flex;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+form p {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}

@@ -6,6 +6,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import AuthForm from "../componentes/componentAuth/AuthForm";
 import Index from "../pages/indexPages/Index";
 import DashboardPage from "../pages/productosPage/dashboardPage";
+import Checkout from "../componentes/cpmponentCheckout/Checkout";
+import Confirmacion from "../componentes/cpmponentCheckout/confirmacion";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
             <Route path="/productos/genero/:genero" element={<ProductosCategoria/>}/>
             <Route path="/carrito" element={<Carrito/>}/>
             <Route path="/dashboard" element={<DashboardPage/>}/>
+            <Route path="/checkout" element={<Checkout/>}/>
+            <Route path="/confirmacion" element={<Confirmacion/>}/>
           </Route>
       </Routes>
     </Router>
