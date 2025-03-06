@@ -8,6 +8,8 @@ import Index from "../pages/indexPages/Index";
 import DashboardPage from "../pages/productosPage/dashboardPage";
 import Checkout from "../componentes/cpmponentCheckout/Checkout";
 import Confirmacion from "../componentes/cpmponentCheckout/confirmacion";
+import IndexVentas from "../componentes/rolesComponents/ventas/ventas";
+import IndexLogistica from "../componentes/rolesComponents/logistica/logistica";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage/>}/>
             <Route path="/checkout" element={<Checkout/>}/>
             <Route path="/confirmacion" element={<Confirmacion/>}/>
+            <Route path="/vendedor" element={<IndexVentas/>}/>
+            <Route path="/logistica" element={<IndexLogistica/>}/>
           </Route>
       </Routes>
     </Router>

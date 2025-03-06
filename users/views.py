@@ -36,12 +36,24 @@ def ingreso(request):
 
         if user:
             login(request, user)
-            return JsonResponse({
-                'mensaje': f'Bienvenido {username}',
-                'is_admin': user.is_staff
+            if user.is_staff: 
+                return JsonResponse({
+                    'mensaje': f'Bienvenido {username}',
+                    'is_admin': user.is_staff
+                    }, status=200)
+            elif user.groups.filter(name="vendedor").exists():
+                return JsonResponse({
+                    "mensaje": f"rol como vendedor señor@: {username}",
+                    "rol": 'vendedor'
+                }, status=200)
+            elif user.groups.filter(name="logistica").exists():
+                return JsonResponse({
+                    "mensaje": f"rol como logistica señor@: {username}",
+                    "rol": 'logistica'
                 }, status=200)
         else:
             return JsonResponse({'error': 'Ups!, verifique sus credenciales...'}, status=400)
+        
     
     return JsonResponse({'error':'El metodo no funciona o algo mas!, intenta de nuevo'})
 
