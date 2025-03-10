@@ -1,4 +1,6 @@
 from django.contrib import admin
+"""
+
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from django.http import HttpResponse
@@ -41,3 +43,4 @@ class VentasAdmin(ImportExportModelAdmin):
 class ClienteAdmin(admin.ModelAdmin):
     list_display = ('idCliente', 'nombre',)
     search_fields = ('idClinte',)
+"""

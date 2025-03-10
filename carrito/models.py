@@ -14,7 +14,7 @@ class Orden(models.Model):
     total = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"Orden {self.id} - Cliente: {self.nombreCliente} documento: {self.N_documento}"
+        return f"Orden {self.id} - Cliente: {self.nombre_cliente} documento: {self.N_documento}"
 
 
 class OrdenItem(models.Model):

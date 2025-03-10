@@ -51,6 +51,10 @@ def ingreso(request):
                     "mensaje": f"rol como logistica señor@: {username}",
                     "rol": 'logistica'
                 }, status=200)
+            else:
+                return JsonResponse({
+                    "mensaje": f"Bienvenido {username}",
+                })
         else:
             return JsonResponse({'error': 'Ups!, verifique sus credenciales...'}, status=400)
         

@@ -8,8 +8,8 @@ import Index from "../pages/indexPages/Index";
 import DashboardPage from "../pages/productosPage/dashboardPage";
 import Checkout from "../componentes/cpmponentCheckout/Checkout";
 import Confirmacion from "../componentes/cpmponentCheckout/confirmacion";
-import IndexVentas from "../componentes/rolesComponents/ventas/ventas";
 import IndexLogistica from "../componentes/rolesComponents/logistica/logistica";
+import BuscadorProducto from "../componentes/rolesComponents/ventas/buscador";
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
       <Routes>
           <Route path="/" element={<Index/>}/>
           <Route path="/formAuth" element={<AuthForm/>}/>
+          <Route path="/buscar" element={<BuscadorProducto/>}/>
           <Route element={<PrivateRoute />}>
             <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
             <Route path="/productos/genero/:genero" element={<ProductosCategoria/>}/>
@@ -24,7 +25,6 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage/>}/>
             <Route path="/checkout" element={<Checkout/>}/>
             <Route path="/confirmacion" element={<Confirmacion/>}/>
-            <Route path="/vendedor" element={<IndexVentas/>}/>
             <Route path="/logistica" element={<IndexLogistica/>}/>
           </Route>
       </Routes>

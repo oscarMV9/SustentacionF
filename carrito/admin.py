@@ -2,7 +2,10 @@ from django.contrib import admin
 from .models import Orden, OrdenItem
 from django.http import HttpResponse
 from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
+from reportlab.lib import colors
+from produccion.models import Produccion
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Image
 from import_export import resources
 from import_export.admin import ExportMixin
 from io import BytesIO
@@ -12,30 +15,53 @@ def pdf_orden(modeladmin, request, queryset):
     response['Content-Disposition'] = 'attachment; filename="ordenes.pdf"'
 
     buffer = BytesIO()
-    p = canvas.Canvas(buffer, pagesize=letter)
-    width, height = letter
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+    elements = []
 
-    y = height - 40
+    styles = getSampleStyleSheet()
+    styleN = styles['Normal']
+    styleH = styles['Heading1']
+
+    # Agregar un título
+    elements.append(Paragraph("Reporte de Órdenes", styleH))
+
     for orden in queryset:
-        p.drawString(30, y, f"Orden ID: {orden.id}")
-        p.drawString(30, y - 20, f"Cliente: {orden.nombre_cliente}")
-        p.drawString(30, y - 40, f"Documento: {orden.N_documento}")
-        p.drawString(30, y - 60, f"Teléfono: {orden.telefono}")
-        p.drawString(30, y - 80, f"Dirección: {orden.direccion}")
-        p.drawString(30, y - 100, f"Fecha: {orden.fecha}")
-        p.drawString(30, y - 120, f"Email: {orden.email}")
-        p.drawString(30, y - 140, f"Status: {orden.status}")
-        p.drawString(30, y - 160, f"Total: {orden.total}")
-        y -= 200
+        # Agregar información de la orden
+        elements.append(Paragraph(f"ID: {orden.id}", styleN))
+        elements.append(Paragraph(f"Nombre del cliente: {orden.nombre_cliente}", styleN))
+        elements.append(Paragraph(f"Número de documento: {orden.N_documento}", styleN))
+        elements.append(Paragraph(f"Teléfono: {orden.telefono}", styleN))
+        elements.append(Paragraph(f"Dirección de envío: {orden.direccion}", styleN))
+        elements.append(Paragraph(f"Fecha de pedido: {orden.fecha}", styleN))
+        elements.append(Paragraph(f"Correo Email: {orden.email}", styleN))
+        elements.append(Paragraph(f"Total de la compra: {orden.total}", styleN))
+        elements.append(Paragraph(f"Estado de la compra: {orden.status}", styleN))
 
-        if y < 40:
-            p.showPage()
-            y = height - 40
+        data = [["Producto", "Cantidad", "Precio Unitario", "Total"]]
+        for item in orden.items.all():
+            try:
+                producto_nombre = item.producto.idProducto.get_nombre_producto()
+            except Produccion.DoesNotExist:
+                producto_nombre = "Producto no disponible"
+            data.append([producto_nombre, item.cantidad, item.precio_unitario, item.cantidad * item.precio_unitario])
 
-    p.save()
-    buffer.seek(0)
-    response.write(buffer.read())
+        table = Table(data)
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+            ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ]))
+        elements.append(table)
+        elements.append(Paragraph("<br/><br/>", styleN))  
+
+    doc.build(elements)
+    pdf = buffer.getvalue()
     buffer.close()
+    response.write(pdf)
     return response
 
 pdf_orden.short_description = "Exportar a PDF"
