@@ -59,7 +59,7 @@ def ingreso(request):
             return JsonResponse({'error': 'Ups!, verifique sus credenciales...'}, status=400)
         
     
-    return JsonResponse({'error':'El metodo no funciona o algo mas!, intenta de nuevo'})
+    return JsonResponse({'error':'Hubo un error.. intenta mas tarde :('})
 
 @csrf_exempt
 def logout(request):
