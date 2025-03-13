@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'Categorias',
     'logistica',
     'carrito',
+    'users',
 ]
 
 JAZZMIN_SETTINGS = {
@@ -98,11 +99,14 @@ TEMPLATES = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'oscarmontoya119@gmail.com'
-EMAIL_HOST_PASSWORD = 'nathalyteamo12'
+EMAIL_HOST = 'smtp.gmail.com'  # Servidor SMTP de Gmail
+EMAIL_PORT = 587  # Puerto SMTP
+EMAIL_USE_TLS = True  # Seguridad TLS
+EMAIL_HOST_USER = 'anastylesgaes4@gmail.com'
+EMAIL_HOST_PASSWORD = 'qophzimkjkawiljv'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+#DEFAULT_FROM_EMAIL = 'tu_correo@gmail.com'  # Dirección de correo predeterminada para el envío
+#qoph zimk jkaw iljv
 
 WSGI_APPLICATION = 'Anastyles.wsgi.application'
 
