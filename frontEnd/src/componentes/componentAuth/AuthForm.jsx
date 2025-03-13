@@ -7,8 +7,10 @@ function AuthForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const [passwordStrength, setPasswordStrength] = useState();
+    const [passwordStrength, setPasswordStrength] = useState("");
     const [email, setEmail] = useState("");
+    const [isPasswordValid, setIsPasswordValid] = useState(false);
+    const [passwordError, setPasswordError] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,7 +29,6 @@ function AuthForm() {
             containerFormRegister.classList.remove("hide");
         });
 
-        
         return () => {
             btnSignIn.removeEventListener("click", () => {
                 containerFormRegister.classList.add("hide");
@@ -43,6 +44,10 @@ function AuthForm() {
 
     const manejoLogin = async (e) => {
         e.preventDefault();
+        if (!email || !password) {
+            setMessage("todos los campos son obligatorios")
+            return;
+        }
         try {
             const response = await axios.post("http://127.0.0.1:8000/api/usuarios/ingreso/", {
                 email,
@@ -53,9 +58,9 @@ function AuthForm() {
             if (response.data.is_admin) {
                 window.location.href = "http://127.0.0.1:8000/admin/";
             } else if (response.data.rol === 'vendedor') {
-                setTimeout(() => navigate("/vendedor"),1500);
+                setTimeout(() => navigate("/vendedor"), 1500);
             } else if (response.data.rol === 'logistica') {
-                setTimeout(() => navigate("/logistica"),1500);
+                setTimeout(() => navigate("/logistica"), 1500);
             } else {
                 navigate("/dashboard");
             }
@@ -71,8 +76,41 @@ function AuthForm() {
         return "Moderada";
     };
 
+    const validatePassword = (pass) => {
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d{2,}).{8,}$/;
+        return passwordRegex.test(pass);
+    };
+
+    const handlePasswordChange = (e) => {
+        const pass = e.target.value;
+        setPassword(pass);
+        setPasswordStrength(passwordSecurity(pass));
+        const isValid = validatePassword(pass);
+        setIsPasswordValid(isValid);
+        setPasswordError(isValid ? "" : "La contraseña debe tener al menos 8 caracteres, 2 números y una mayúscula.");
+    };
+
     const manejoRegistro = async (registro) => {
         registro.preventDefault();
+        if (!username || !email || !password) {
+            setMessage("Todos los campos son obligatorios");
+            return;
+        }
+        if (/^\d+$/.test(username)) {
+            setMessage("El nombre de usuario no pueden ser solo numeros");
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setMessage("El correo tiene que ser valido");
+            return;
+        }
+
+        if (!isPasswordValid) {
+            setMessage("La contraseña no cumple con los requisitos");
+            return;
+        }
         try {
             const response = await axios.post("http://127.0.0.1:8000/api/usuarios/registro/", {
                 username,
@@ -99,11 +137,6 @@ function AuthForm() {
                 <div className="form-information">
                     <div className="form-information-childs">
                         <h2>Registro</h2>
-                        <div className="icons">
-                            <i className="bx bxl-google"></i>
-                            <i className="bx bxl-github"></i>
-                            <i className="bx bxl-linkedin"></i>
-                        </div>
                         <p>o usa tu usuario para registrarte</p>
                         <form onSubmit={manejoRegistro} noValidate className="form form-register">
                             <div>
@@ -121,13 +154,11 @@ function AuthForm() {
                             <div>
                                 <label>
                                     <i className='bx bx-lock-alt'></i>
-                                    <input type="password" placeholder="Contraseña" value={password} onChange={(registro) => {
-                                        setPassword(registro.target.value);
-                                        setPasswordStrength(passwordSecurity(registro.target.value));
-                                    }} required />
+                                    <input type="password" placeholder="Contraseña" value={password} onChange={handlePasswordChange} required />
                                 </label>
                             </div>
                             <p>Seguridad: {passwordStrength}</p>
+                            {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
                             <button type="submit">Registrarse</button>
                         </form>
                         {message && <p>{message}</p>}
