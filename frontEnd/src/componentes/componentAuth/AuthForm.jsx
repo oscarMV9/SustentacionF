@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../componentAuth/formAuth.css";
+import { Link } from "react-router-dom";
 
 function AuthForm() {
     const [username, setUsername] = useState("");
@@ -87,7 +88,7 @@ function AuthForm() {
         setPasswordStrength(passwordSecurity(pass));
         const isValid = validatePassword(pass);
         setIsPasswordValid(isValid);
-        setPasswordError(isValid ? "" : "La contraseña debe tener al menos 8 caracteres, 2 números y una mayúscula.");
+        setPasswordError(isValid ? "" : "Al menos 8 caracteres, 2 mayusculas y 2 numeros");
     };
 
     const manejoRegistro = async (registro) => {
@@ -191,6 +192,9 @@ function AuthForm() {
                                 </label>
                             </div>
                             <button type="submit" value="Iniciar Sesión">Ingresar</button>
+                            <Link to="/restablecer-contraseña" className="reset-password">
+                                <a>¿Olvidaste tu contraseña?</a>
+                            </Link>
                         </form>
                         {message && <p>{message}</p>}
                     </div>

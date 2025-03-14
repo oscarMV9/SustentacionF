@@ -84,10 +84,12 @@
 .form-information-childs h2 {
     color: #333;
     font-size: 2rem;
+    margin-bottom: 10px;
 }
   
 .form-information-childs p {
     color: #555;
+    margin-bottom: 10px;
 }
   
 .icons {
@@ -157,8 +159,12 @@
     position: absolute;
     transform: translateY(-300%);
   }
+
+  .form div {
+    display: flex;
+    flex-direction: column-reverse;
+  }
   
-  /*PERSONALIZACION DE MIS ALERTAS Y MENSAJES */
   .form div .alerta {
     width: 290px;
     text-align: left;
@@ -194,7 +200,6 @@
     outline: solid 2px #9d2222;
   }
   
-  /*RESPONSIVE FORM*/
   
   @media screen and (max-width:750px) {
     html {

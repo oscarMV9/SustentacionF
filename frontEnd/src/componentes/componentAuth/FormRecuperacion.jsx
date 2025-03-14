@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import "../componentAuth/FormRecuperacion.css";
 
 const FormRecuperacion = () => {
     const [email, setEmail] = useState('');
@@ -26,17 +27,21 @@ const FormRecuperacion = () => {
     };
 
     return(
-        <div className="formulario-recuperacion">
+        <div className="contenedor">
+            <div className="form-recuperacion">
             <h2>Recuperar tu contraseña</h2>
-            <form onSubmit={manejoEnvio}>
-                <input type="email"
-                placeholder="Tu correo electronico"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required/>
-                <button type="submit">Enviar</button>
-            </form>
-            {mensaje && <p>{mensaje}</p>}
+                <form onSubmit={manejoEnvio} className="form">
+                    <label>
+                        <input type="email"
+                        placeholder="Tu correo electronico"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required/>
+                    </label>
+                    <button type="submit">Enviar</button>
+                </form>
+                {mensaje && <p>{mensaje}</p>}
+            </div>
         </div>
     );
 };
