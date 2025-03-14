@@ -10,6 +10,7 @@ import Checkout from "../componentes/cpmponentCheckout/Checkout";
 import Confirmacion from "../componentes/cpmponentCheckout/confirmacion";
 import IndexLogistica from "../componentes/rolesComponents/logistica/logistica";
 import BuscadorProducto from "../componentes/rolesComponents/ventas/buscador";
+import FormRecuperacion from "../componentes/componentAuth/FormRecuperacion";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Routes>
           <Route path="/" element={<Index/>}/>
           <Route path="/formAuth" element={<AuthForm/>}/>
+          <Route path="/restablecer-contraseña" element={<FormRecuperacion/>}/>
           <Route path="/buscar" element={<BuscadorProducto/>}/>
           <Route element={<PrivateRoute />}>
             <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
