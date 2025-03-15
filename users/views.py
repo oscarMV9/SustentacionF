@@ -94,3 +94,28 @@ def Solicitar_recuperacion(request):
         )
 
         return JsonResponse({'mensaje': 'Se a enviado un correo con instrucciones'}, status=200)
+    
+@csrf_exempt
+def restablecer_contraseña(request, token):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        new_password = data.get('nueva_contraseña')
+        if not new_password:
+            return JsonResponse({'error': 'La contraseña es obligatoria'}, status=400)
+        
+        try: 
+            reset_token = PasswordReset.objects.get(token=token)
+        except PasswordReset.DoesNotExist:
+            return JsonResponse({'error': 'este enlace ya no es valido o expiro'}, status=400)
+        
+        if (timezone.now() - reset_token.creado_en).days > 1:
+            reset_token.delete()
+            return JsonResponse({'error': 'Enlace expirado'}, status=400)
+        
+        user = reset_token.user
+        user.set_password(new_password)
+        user.save()
+
+        reset_token.delete()
+
+        return JsonResponse({'mensaje': 'La contraseña se restablecio exitosamente'}, status=200)
