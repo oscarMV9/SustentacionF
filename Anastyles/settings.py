@@ -30,14 +30,79 @@ INSTALLED_APPS = [
     'users',
 ]
 
-JAZZMIN_SETTINGS = {
-    "site_logo": "/imagenes/AnaStyle.png",
-    "welcome_sign": "Bienvenido al panel de admin :)))",
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-success",
+    "accent": "accent-teal",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-olive",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": True,
     "theme": "darkly",
-    "site_title": "Admin Biblioteca",
-    "site_header": "Sistema de Administración de la Biblioteca",
+    "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-outline-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    },
+    "actions_sticky_top": False
 }
 
+JAZZMIN_SETTINGS = {
+    "site_title": "AnaStyles",
+    "site_header": "AnaStyles",
+    "site_brand": "Admin AnaStyles",
+    "show_ui_builder": True,
+    # "site_logo": "/staticfiles/imagenes/AnaStyle.png",
+    "theme": "darkly",
+    "navigation_expanded": False,
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "auth_users.Profile": "fas fa-user",
+        "auth_users": "fas fa-users-cog",
+        "inventario":"fas fa-clipboard-list",
+        "inventario.purchase_of_inputs":"fa-solid fa-truck-fast",
+        "inventario.product":"fa-solid fa-bag-shopping",
+        "inventario.brand":"fa-solid fa-tag",
+        "inventario.supplier":"fa-solid fa-truck-field-un",
+        "inventario.category":"fa-solid fa-list",
+        "ventas":"fas fa-shopping-cart",
+        "ventas.Venta":"fas fa-shopping-cart",
+        "ventas.Venta_DetalleVenta":"fas fa-shopping-cart",
+    },
+    "copyright": "AnaStyles 2025",
+    "topmenu_links": [
+        # Ícono de campana para notificaciones
+        {
+            "name": "Notificaciones",
+            "url": "",  # Ruta a la vista de notificaciones
+            "icon": "fas fa-bell",  # Ícono de FontAwesome
+            "permissions": ["auth.view_user"],  # Permisos requeridos
+        },
+        ],
+         "custom_css": "admin_styles.css",  # Cargar CSS personalizado
+    # "welcome_sign": "Bienvenido al panel de admin :)))",
+    # "theme": "dark",
+    # "site_title": "Admin Biblioteca",
+    # "site_header": "Sistema de Administración de la Biblioteca",
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

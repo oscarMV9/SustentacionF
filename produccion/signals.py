@@ -18,5 +18,3 @@ def enviarCorreoNuevoProducto(sender, instance, created, **kwargs):
             raise ValidationError("Error en el encabezado del correo")
         except Exception as e:
             print(f"Ocurrió un error: {e}")
-
-        #Recordatorio pa mi, hacer el makemigrations y migrate para su funcionamiento.
