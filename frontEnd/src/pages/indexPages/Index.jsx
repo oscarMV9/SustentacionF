@@ -30,7 +30,7 @@ function Index() {
     return (
     <body>
             <header className="header-index">
-                <div className="logo">BB</div>
+                <div className="logo">AS</div>
                 <div className="menu-container">
                     <div className="menu-button"></div>
                     <ul className="menu">
@@ -44,12 +44,6 @@ function Index() {
                             <Link to="/formAuth">
                                 <span>Registro</span>
                                 <span className="menu-text">Registro</span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/productos">
-                                <span>Productos</span>
-                                <span className="menu-text">Productos</span>
                             </Link>
                         </li>
                     </ul>

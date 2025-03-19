@@ -9,6 +9,10 @@ body {
     color: #ffffffcc;
 }
 
+.logo {
+  font-family: 'Times New Roman', Times, serif;
+}
+
 .header-index .logo{
     border: 2px solid #fff;
     border-radius: 50%;
@@ -50,7 +54,7 @@ body {
     text-align: center;
   }
   .contenido .color{
-    color: #c70239;
+    color: #f7da8c;
   }
   .contenido p{
     font-size: 20px;
