@@ -138,7 +138,7 @@ function AuthForm() {
                 <div className="form-information">
                     <div className="form-information-childs">
                         <h2>Registro</h2>
-                        <p>o usa tu usuario para registrarte</p>
+                        <p>usa tu nombre para registrarte</p>
                         <form onSubmit={manejoRegistro} noValidate className="form form-register">
                             <div>
                                 <label>

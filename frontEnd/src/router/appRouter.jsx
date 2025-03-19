@@ -9,9 +9,9 @@ import DashboardPage from "../pages/productosPage/dashboardPage";
 import Checkout from "../componentes/cpmponentCheckout/Checkout";
 import Confirmacion from "../componentes/cpmponentCheckout/confirmacion";
 import IndexLogistica from "../componentes/rolesComponents/logistica/logistica";
-import BuscadorProducto from "../componentes/rolesComponents/ventas/buscador";
 import FormRecuperacion from "../componentes/componentAuth/FormRecuperacion";
 import RestablecerContraseña from "../componentes/componentAuth/ResetPassword";
+import Ventas from "../componentes/rolesComponents/ventas/ventas";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <Route path="/formAuth" element={<AuthForm/>}/>
           <Route path="/restablecer-contraseña" element={<FormRecuperacion/>}/>
           <Route path="/reset-password/:token" element={<RestablecerContraseña/>}/>
-          <Route path="/buscar" element={<BuscadorProducto/>}/>
+          <Route path="/ventas" element={<Ventas/>}/>
           <Route element={<PrivateRoute />}>
             <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
             <Route path="/productos/genero/:genero" element={<ProductosCategoria/>}/>

@@ -3,9 +3,8 @@ from . import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r"ventas", views.VistaVentas, 'ventas')
-router.register(r"ventaItems",views.VistaVentaItem, 'ventaItem')
+router.register(r"ventas", views.VistaVentas)
 
 urlpatterns = [
-    path("ventas/", include(router.urls))
+    path("", include(router.urls))
 ]
