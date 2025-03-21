@@ -4,11 +4,11 @@ from import_export.admin import ImportExportModelAdmin
 from django.http import HttpResponse
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from .models import Venta
+from .models import Venta, VentaItem
 
 def GeneratePDFVentas(modeladmin, request, queryset):
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="Reporte_Logistica.pdf"'
+    response['Content-Disposition'] = 'attachment; filename="Reporte_Ventas.pdf"'
     
     c = canvas.Canvas(response, pagesize=letter)
     
@@ -22,19 +22,22 @@ def GeneratePDFVentas(modeladmin, request, queryset):
         text_object.setFont("Helvetica-Bold", 12)
         text_object.textLine(f"ID Venta: {venta.idVenta}")
         text_object.setFont("Helvetica", 12)
-        text_object.textLine(f"Cliente: {venta.cliente.nombre} {venta.cliente.apellido}")
-        text_object.textLine(f"Fecha: {venta.fechaPedido}") 
+        text_object.textLine(f"Cliente: {venta.nombre_cliente} {venta.apellido_cliente}")
+        text_object.textLine(f"Fecha: {venta.fecha}")
+        text_object.textLine(f"Total: ${venta.total:.2f}")
         text_object.textLine("="*50)
         
         text_object.setFont("Helvetica-Bold", 12)
-        text_object.textLine(f"Cliente Detalles:")
+        text_object.textLine(f"Detalles de los Productos:")
         text_object.setFont("Helvetica", 12)
-        text_object.textLine(f"  Nombre: {venta.cliente.nombre} {venta.cliente.apellido}")
-        text_object.textLine(f"  Email: {venta.cliente.email}")
-        text_object.textLine(f"  Teléfono: {venta.cliente.telefono}")
-        text_object.textLine(f"  Dirección: {venta.cliente.direccion if venta.cliente.direccion else 'N/A'}")
-        text_object.textLine("="*50)
-        
+
+        for item in venta.items.all():
+            text_object.textLine(f"  Producto: {item.producto.idProducto.get_nombre_producto()}")
+            text_object.textLine(f"  Cantidad: {item.cantidad}")
+            text_object.textLine(f"  Precio Unitario: ${item.precio_unitario:.2f}")
+            text_object.textLine(f"  Subtotal: ${item.subtotal:.2f}")
+            text_object.textLine("-" * 50)
+
     c.drawText(text_object)
     c.showPage()
     c.save()
@@ -43,53 +46,40 @@ def GeneratePDFVentas(modeladmin, request, queryset):
 
 GeneratePDFVentas.short_description = "Generar reporte PDF de Ventas"
 
-def GeneratePDFClientes(modeladmin, request, queryset):
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="Reporte_Logistica.pdf"'
-
-    
-    c = canvas.Canvas(response, pagesize=letter)
-    
-    text_object = c.beginText(40, 750)  
-    text_object.setFont("Helvetica-Bold", 12)
-
-    text_object.textLine("Reporte de Clientes")
-    text_object.textLine("="*50)
-    
-    for cliente in queryset:
-        text_object.setFont("Helvetica-Bold", 12)
-        text_object.textLine(f"ID Cliente: {cliente.idCliente}")
-        text_object.setFont("Helvetica", 12)
-        text_object.textLine(f"Nombre: {cliente.nombre} {cliente.apellido}")
-        text_object.textLine(f"Email: {cliente.email}")
-        text_object.textLine(f"Teléfono: {cliente.telefono}")
-        text_object.textLine(f"Dirección: {cliente.direccion if cliente.direccion else 'N/A'}")
-        text_object.textLine("="*50)
-        
-    c.drawText(text_object)
-    c.showPage()
-    c.save()
-    
-    return response
-
-GeneratePDFClientes.short_description = "Generar reporte PDF de Clientes"
-
+# Recurso para exportar datos de ventas
 class VentaResource(resources.ModelResource):
     class Meta:
         model = Venta
-        fields = ('idVenta', 'cliente', 'fechaPedido', 'total') 
-        export_order = ('idVenta', 'cliente', 'fechaPedido', 'total')
+        fields = ('idVenta', 'nombre_cliente', 'apellido_cliente', 'fecha', 'total') 
+        export_order = ('idVenta', 'nombre_cliente', 'apellido_cliente', 'fecha', 'total')
 
+# Inline para mostrar los productos (VentaItem) dentro de la venta
+class VentaItemInline(admin.TabularInline):
+    model = VentaItem
+    extra = 1  # Muestra un formulario extra para agregar productos
+    fields = ('producto', 'cantidad', 'precio_unitario')
+    readonly_fields = ('subtotal',)  # Para que no sea editable el subtotal
+    can_delete = True
+
+    def subtotal(self, obj):
+        return obj.subtotal
+    subtotal.short_description = "Subtotal"
+
+# Admin de la clase Venta
 @admin.register(Venta)
 class VentasAdmin(ImportExportModelAdmin):
-    list_display = ('idVenta', 'get_cliente_nombre', 'fechaPedido', 'total')  
-    search_fields = ('cliente__nombre', 'idVenta')
-    actions = [GeneratePDFVentas]  
+    list_display = ('idVenta', 'get_cliente_nombre', 'fecha', 'total')  
+    search_fields = ('nombre_cliente', 'idVenta', 'cedula')
+    actions = [GeneratePDFVentas]
+    inlines = [VentaItemInline]  # Agregamos el inline para los productos asociados a la venta
 
-    def fechaPedido(self, obj):
-        return obj.fechaPedido 
-    fechaPedido.admin_order_field = 'fechaPedido'  
+    def fecha(self, obj):
+        return obj.fecha 
+    fecha.admin_order_field = 'fecha'  
 
     def get_cliente_nombre(self, obj):
-        return f"{obj.cliente.nombre} {obj.cliente.apellido}"
+        return f"{obj.nombre_cliente} {obj.apellido_cliente}"
     get_cliente_nombre.short_description = 'Cliente'
+
+
+
