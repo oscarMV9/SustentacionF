@@ -32,13 +32,26 @@ def enviarCorreoLogistica(sender, instance, created, **kwargs):
     if created:
         asunto = 'Nueva Orden Pedida - Logística'
 
+        productos = instance.get_productos()
+
+        productos_html = ""
+        for producto in productos:
+            productos_html += f"""
+            <p><strong>Producto:</strong> {producto['producto']}<br>
+            <strong>Cantidad:</strong> {producto['cantidad']}<br>
+            <strong>Precio unitario:</strong> {producto['precio_unitario']}<br>
+            <strong>Total:</strong> {producto['total']}</p>
+            <hr>
+            """
+
         mensaje = f"""
         <html>
             <body>
                 <h2>Se ha solicitado un nuevo Domicilio</h2>
                 <p><strong>Orden:</strong> {instance.orden}</p>
                 <p><strong>Fecha de Solicitud:</strong> {instance.fecha}</p>
-                <hr>
+                <h3>Productos en la Orden:</h3>
+                {productos_html}
                 <p>Este correo es generado automáticamente para notificar sobre la nueva orden de logística.</p>
             </body>
         </html>
