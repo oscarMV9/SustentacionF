@@ -2,7 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from inventario.models import Inventario, Productos
 from django.db.models import F
-from django.db import transaction  # Para asegurar que todas las operaciones sean atómicas
+from django.db import transaction
 
 class Venta(models.Model):
     idVenta = models.AutoField(primary_key=True)
@@ -15,7 +15,6 @@ class Venta(models.Model):
 
     @property
     def total(self):
-        # Calculamos el total de la venta automáticamente a partir de los items
         return sum(item.subtotal for item in self.items.all())
 
     def __str__(self):
@@ -29,15 +28,12 @@ class VentaItem(models.Model):
 
     @property
     def subtotal(self):
-        # El subtotal de cada item es la cantidad por el precio unitario
         return self.precio_unitario * self.cantidad
 
     def save(self, *args, **kwargs):
-        # Disminuir el inventario cuando se guarda un item de la venta
         if self.cantidad > self.producto.cantidades:
             raise ValidationError("No hay suficiente cantidad en inventario para este producto.")
         
-        # Bloquear la operación dentro de una transacción atómica para evitar problemas de concurrencia
         with transaction.atomic():
             self.producto.cantidades = F('cantidades') - self.cantidad
             self.producto.save()

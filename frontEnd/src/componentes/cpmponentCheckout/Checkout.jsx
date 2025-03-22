@@ -43,6 +43,27 @@ function Checkout() {
             return;
         }
 
+        if (/^\d+$/.test(nombre_cliente)) {
+            setMensaje("nombre valido por favor");
+            return;
+        }
+
+        if (N_documento < 10000000 || N_documento > 9999999999 ) {
+            setMensaje("numero de cedula no valida");
+
+            return;
+        }
+
+        if (telefono < 3000000000 || telefono > 3999999999) {
+            setMensaje("el telefono contiene 10 digitos y empieza por 3");
+            return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setMensaje("Correo electrónico no valido.");
+            return;
+        }
+
         try {
             await axios.post("http://127.0.0.1:8000/api/pagos/checkout/", {
                 carrito,
@@ -103,14 +124,14 @@ function Checkout() {
                             </div>
                         </div>
 
-                        <form onSubmit={manejarPago}>
+                        <form onSubmit={manejarPago} className="form-pago">
                             <div className="inputs">
                                 <label>Nombre del Cliente</label>
                                 <input type="text" value={nombre_cliente} onChange={(e) => setNombreCliente(e.target.value)} required />
                             </div>
                             <div className="inputs">
                                 <label>Número de Documento</label>
-                                <input type="text" value={N_documento} onChange={(e) => setNDocumento(e.target.value)} required />
+                                <input type="number" value={N_documento} onChange={(e) => setNDocumento(e.target.value)} required />
                             </div>
                             <div className="inputs">
                                 <label>Teléfono</label>
@@ -125,8 +146,9 @@ function Checkout() {
                                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                             </div>
                             <button type="submit">Confirmar Pago</button>
+                            {mensaje && <p>{mensaje}</p>}
                         </form>
-                        {mensaje && <p>{mensaje}</p>}
+                        
                     </div>
                 ) : (
                     <p>Tu carrito está vacío.</p>
