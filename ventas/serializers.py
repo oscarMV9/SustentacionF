@@ -32,7 +32,6 @@ class VentaSerializer(serializers.ModelSerializer):
         instance.direccion = validated_data.get('direccion', instance.direccion)
         instance.save()
 
-        # Actualizar los items
         keep_items = []
         for item_data in items_data:
             if "id" in item_data.keys():
