@@ -74,6 +74,7 @@ const FormularioVenta = () => {
     });
 
     const [mensaje, setMensaje] = useState("");
+    const [error, setError] = useState("");
 
     const handleChange = (e) => {
         setCliente({ ...cliente, [e.target.name]: e.target.value });
@@ -105,6 +106,7 @@ const FormularioVenta = () => {
         }
 
         try {
+            console.log("Enviando datos:", cliente);
             const response = await fetch("http://localhost:8000/api/ventas/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -131,30 +133,27 @@ const FormularioVenta = () => {
             });
 
         } catch (error) {
-            setMensaje("Hubo un error al enviar los datos.");
+            setError("Hubo un error al enviar los datos.");
             console.error(error);
         }
     };
 
     return (
-        <>
         <div className="container">
             <div className="venta-container">
                 <h2 className="titulo">Formulario de Venta</h2>
                 {mensaje && <p className="mensaje">{mensaje}</p>}
+                {error && <p className="error">{error}</p>}
                 <form onSubmit={handleSubmit} className="formulario">
                     <input type="text" name="nombre_cliente" placeholder="Nombre" value={cliente.nombre_cliente} onChange={handleChange} required className="input" />
                     <input type="text" name="apellido_cliente" placeholder="Apellido" value={cliente.apellido_cliente} onChange={handleChange} required className="input" />
                     <input type="text" name="cedula" placeholder="Cédula" value={cliente.cedula} onChange={handleChange} required className="input" />
                     <input type="email" name="correo" placeholder="Correo" value={cliente.correo} onChange={handleChange} className="input" />
                     <input type="text" name="direccion" placeholder="Dirección" value={cliente.direccion} onChange={handleChange} className="input" />
-                </form>
-            </div>
-                <h3 className="subtitulo">Buscar Productos</h3>
-                <BuscadorProducto onAgregarProducto={agregarProducto} />
-
-                <h3 className="subtitulo">Productos en la Venta</h3>
-                {cliente.items.length === 0 ? (
+                    <h3 className="subtitulo">Buscar Productos</h3>
+                    <BuscadorProducto onAgregarProducto={agregarProducto} />
+                    <h3 className="subtitulo">Productos en la Venta</h3>
+                    {cliente.items.length === 0 ? (
                         <p className="mensaje">Aún no hay productos</p>
                     ) : (
                         cliente.items.map((prod, index) => (
@@ -175,9 +174,10 @@ const FormularioVenta = () => {
                             </div>
                         ))
                     )}
-                {cliente.items.length > 0 && <button type="submit" className="btn-enviar">Confirmar Venta</button>}
+                    {cliente.items.length > 0 && <button type="submit" className="btn-enviar">Confirmar Venta</button>}
+                </form>
+            </div>
         </div>
-        </>
     );
 };
 

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../cpmponentCheckout/confirmacion.css";
 
 function Confirmacion() {
     return (

@@ -30,7 +30,7 @@ function Dashboard() {
                 <h2 className="messaje_title">{user?.mensaje}</h2>
                 <nav className="navbar-nav">
                     <Link to="/dashboard" className="link-dashboard">
-                        <button className="boton-dashboard">Productos</button>
+                        <button className="boton-dashboard">Catalogo</button>
                     </Link>
                     <Link to="/carrito" className="link-carrito">
                         <button className="boton-carrito">Ver Carrito</button>

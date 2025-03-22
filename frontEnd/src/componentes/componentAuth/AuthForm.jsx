@@ -20,25 +20,38 @@ function AuthForm() {
         const containerFormRegister = document.querySelector(".container-form.register");
         const containerFormLogin = document.querySelector(".container-form.login");
 
+        const limpiarInputs = () => {
+            setUsername("");
+            setEmail("");
+            setPassword("");
+            setMessage("");
+            setPasswordStrength("");
+            setPasswordError("");
+        };
+
         btnSignIn.addEventListener("click", () => {
             containerFormRegister.classList.add("hide");
             containerFormLogin.classList.remove("hide");
+            limpiarInputs();
         });
 
         btnSignUp.addEventListener("click", () => {
             containerFormLogin.classList.add("hide");
             containerFormRegister.classList.remove("hide");
+            limpiarInputs();
         });
 
         return () => {
             btnSignIn.removeEventListener("click", () => {
                 containerFormRegister.classList.add("hide");
                 containerFormLogin.classList.remove("hide");
+                limpiarInputs();
             });
 
             btnSignUp.removeEventListener("click", () => {
                 containerFormLogin.classList.add("hide");
                 containerFormRegister.classList.remove("hide");
+                limpiarInputs();
             });
         };
     }, []);
@@ -171,7 +184,7 @@ function AuthForm() {
                     <div className="info-childs">
                         <h2>Bienvenido</h2>
                         <p>Ingresa tus datos para poder acceder a nuestro sistema</p>
-                        <input type="button" value="Registrarse" id="sign-up" />
+                        <input type="button" value="Registrarse" id="sign-up"/>
                     </div>
                 </div>
                 <div className="form-information">
@@ -192,10 +205,10 @@ function AuthForm() {
                                 </label>
                             </div>
                             <button type="submit" value="Iniciar Sesión">Ingresar</button>
-                            <Link to="/restablecer-contraseña" className="reset-password">
-                                <a>¿Olvidaste tu contraseña?</a>
-                            </Link>
                         </form>
+                        <Link to="/restablecer-contraseña" className="reset-password">
+                                <a>¿Olvidaste tu contraseña?</a>
+                        </Link>
                         {message && <p>{message}</p>}
                     </div>
                 </div>
