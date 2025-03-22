@@ -65,7 +65,7 @@ function Checkout() {
         }
 
         try {
-            await axios.post("http://127.0.0.1:8000/api/pagos/checkout/", {
+            const datos = await axios.post("http://127.0.0.1:8000/api/pagos/checkout/", {
                 carrito,
                 nombre_cliente,
                 N_documento,
@@ -73,6 +73,9 @@ function Checkout() {
                 direccion,
                 email,
             });
+
+            console.log("datos enviados: " + datos);
+
 
             const templateParams = {
                 nombre_cliente,
