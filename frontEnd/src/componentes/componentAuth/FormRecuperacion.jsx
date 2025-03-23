@@ -27,10 +27,10 @@ const FormRecuperacion = () => {
     };
 
     return(
-        <div className="contenedor">
+        <div className="contenedor-reset">
             <div className="form-recuperacion">
-            <h2>Recuperar tu contraseña</h2>
-                <form onSubmit={manejoEnvio} className="form">
+            <h2 className="title-reset">Recuperar tu contraseña</h2>
+                <form onSubmit={manejoEnvio} className="form-reset">
                     <label>
                         <input type="email"
                         placeholder="Tu correo electronico"

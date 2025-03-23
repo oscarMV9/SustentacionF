@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import "../componentAuth/ResetPassword.css";
 
 const RestablecerContraseña = () => {
     const { token } = useParams();
@@ -37,10 +38,9 @@ const RestablecerContraseña = () => {
     };
 
     return (
-        <div className="container">
-            <div className="form-restablecer">
-                <h2>Restablecer contraseña</h2>
-                <form onSubmit={ManejoEnvio} className="form">
+        <div className="container-reset">
+            <form onSubmit={ManejoEnvio} className="form-restablecer">
+            <h2 className="title-restablecer">Restablecer contraseña</h2>
                     <label>
                         <input
                             type="password"
@@ -55,7 +55,6 @@ const RestablecerContraseña = () => {
                 </form>
                 {mensaje && <p>{mensaje}</p>}
             </div>
-        </div>
     );
 };
 

@@ -27,11 +27,24 @@ class Logistica(models.Model):
     direccion = models.CharField(max_length=50)
     fecha = models.DateTimeField(auto_now_add=True)
 
+    def get_productos(self):
+        orden_items = self.orden.items.all()
+        productos = []
+        for item in orden_items:
+            producto = item.producto
+            productos.append({
+                'producto': producto.idProducto.get_nombre_producto(),
+                'cantidad': item.cantidad,
+                'precio_unitario': item.precio_unitario,
+                'total': item.cantidad * item.precio_unitario
+            })
+        return productos
+
     def save(self, *args, **kwargs):
         self.direccion = self.orden.direccion
 
         if self.transportista.estado == 'EN ENTREGA':
-            raise ValidationError("Este transportista está ocupado, seleccione otro por favor")
+            raise ValidationError("Este transportista se encuentra ocupado, seleccione otro por favor.")
 
         super().save(*args, **kwargs)
 
