@@ -12,6 +12,7 @@ import IndexLogistica from "../componentes/rolesComponents/logistica/logistica";
 import FormRecuperacion from "../componentes/componentAuth/FormRecuperacion";
 import RestablecerContraseña from "../componentes/componentAuth/ResetPassword";
 import Ventas from "../componentes/rolesComponents/ventas/ventas";
+import BuscadorProducto from "../componentes/rolesComponents/ventas/buscador";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/restablecer-contraseña" element={<FormRecuperacion/>}/>
           <Route path="/reset-password/:token" element={<RestablecerContraseña/>}/>
           <Route path="/ventas" element={<Ventas/>}/>
+          <Route path="/buscador" element={<BuscadorProducto/>}/>
           <Route element={<PrivateRoute />}>
             <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
             <Route path="/productos/genero/:genero" element={<ProductosCategoria/>}/>
