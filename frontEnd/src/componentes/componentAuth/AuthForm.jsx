@@ -72,7 +72,7 @@ function AuthForm() {
             if (response.data.is_admin) {
                 window.location.href = "http://127.0.0.1:8000/admin/";
             } else if (response.data.rol === 'vendedor') {
-                setTimeout(() => navigate("/vendedor"), 1500);
+                setTimeout(() => navigate("/ventas"), 1500);
             } else if (response.data.rol === 'logistica') {
                 setTimeout(() => navigate("/logistica"), 1500);
             } else {

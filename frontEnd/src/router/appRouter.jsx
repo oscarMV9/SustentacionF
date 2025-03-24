@@ -8,13 +8,14 @@ import Index from "../pages/indexPages/Index";
 import DashboardPage from "../pages/productosPage/dashboardPage";
 import Checkout from "../componentes/cpmponentCheckout/Checkout";
 import Confirmacion from "../componentes/cpmponentCheckout/confirmacion";
-import IndexLogistica from "../componentes/rolesComponents/logistica/logistica";
 import FormRecuperacion from "../componentes/componentAuth/FormRecuperacion";
 import RestablecerContraseña from "../componentes/componentAuth/ResetPassword";
 import Ventas from "../componentes/rolesComponents/ventas/ventas";
 import BuscadorProducto from "../componentes/rolesComponents/ventas/buscador";
+import RutasProtegidas from "./RutasProtegidas";
 
 function App() {
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <Router>
       <Routes>
@@ -22,16 +23,18 @@ function App() {
           <Route path="/formAuth" element={<AuthForm/>}/>
           <Route path="/restablecer-contraseña" element={<FormRecuperacion/>}/>
           <Route path="/reset-password/:token" element={<RestablecerContraseña/>}/>
-          <Route path="/ventas" element={<Ventas/>}/>
+
           <Route path="/buscador" element={<BuscadorProducto/>}/>
           <Route element={<PrivateRoute />}>
+            <Route element={<RutasProtegidas isAllowed={user?.rol === "vendedor"}/>}>
+              <Route path="/ventas" element={<Ventas/>}/>
+            </Route>
             <Route path="/productos/:categoria" element={<ProductosCategoria/>}/>
             <Route path="/productos/genero/:genero" element={<ProductosCategoria/>}/>
             <Route path="/carrito" element={<Carrito/>}/>
             <Route path="/dashboard" element={<DashboardPage/>}/>
             <Route path="/checkout" element={<Checkout/>}/>
             <Route path="/confirmacion" element={<Confirmacion/>}/>
-            <Route path="/logistica" element={<IndexLogistica/>}/>
           </Route>
       </Routes>
     </Router>

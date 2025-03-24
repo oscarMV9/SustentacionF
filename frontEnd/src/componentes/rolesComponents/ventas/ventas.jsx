@@ -1,6 +1,7 @@
 import { useState } from "react";
 import BuscadorProducto from "./buscador";
 import "../ventas/ventas.css";
+import DashboardVentas from "./dashboardventas";
 
 const FormularioVenta = () => {
     const [cliente, setCliente] = useState({
@@ -79,6 +80,7 @@ const FormularioVenta = () => {
 
     return (
         <div>
+        <DashboardVentas />
         <div className="container">
             <div className="venta-container">
                 <h2 className="titulo">Datos del cliente</h2>
@@ -97,26 +99,28 @@ const FormularioVenta = () => {
             <BuscadorProducto onAgregarProducto={agregarProducto}/>
             </div>
         </div>
-        <div className="container">
+        <div className="container-items">
             <h3 className="subtitulo">Productos en la Venta</h3>
             {cliente.items.length === 0 ? (
                 <p className="mensaje">Aún no hay productos</p>
             ) : (
             cliente.items.map((prod, index) => (
             <div key={index} className="producto-en-venta">
-                <h3>{prod.nombre}</h3>
-                    <p><strong>Precio:</strong> ${prod.precio}</p>
-                    <p><strong>Categoría:</strong> {prod.categoria_prenda}</p>
-                    <label className="label">Cantidad:</label>
-                    <input 
-                    type="number" 
-                    value={prod.cantidadSeleccionada} 
-                    min="1" 
-                    max={prod.cantidad} 
-                    onChange={(e) => modificarCantidad(index, parseInt(e.target.value))}
-                    className="input-cantidad"
-                    />
-                    <button onClick={() => eliminarProducto(index)} className="btn-eliminar">❌ Eliminar</button>
+                <div className="producto-info">
+                    <h3>{prod.nombre}</h3>
+                        <p><strong>Precio:</strong> ${prod.precio}</p>
+                        <p><strong>Categoría:</strong> {prod.categoria_prenda}</p>
+                        <label className="label">Cantidad:</label>
+                        <input 
+                        type="number" 
+                        value={prod.cantidadSeleccionada} 
+                        min="1" 
+                        max={prod.cantidad} 
+                        onChange={(e) => modificarCantidad(index, parseInt(e.target.value))}
+                        className="input-cantidad"
+                        />
+                </div>
+                <button onClick={() => eliminarProducto(index)} className="btn-eliminar">Eliminar</button>
             </div>
             ))
             )}
