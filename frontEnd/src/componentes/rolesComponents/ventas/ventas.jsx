@@ -17,7 +17,6 @@ const FormularioVenta = () => {
     const [error, setError] = useState("");
     const [total, setTotal] = useState(0);
 
-    // Formateador para pesos colombianos
     const formatCurrency = (value) => {
         return new Intl.NumberFormat("es-CO", {
             style: "currency",

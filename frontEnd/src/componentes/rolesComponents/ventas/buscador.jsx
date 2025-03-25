@@ -56,7 +56,10 @@ const BuscadorProducto = ({ onAgregarProducto}) => {
                     <p><strong>Precio: </strong>{producto.precio}</p>
                     <p><strong>talla: </strong>{producto.talla}</p>
                     <p><strong>cantidades: </strong>{producto.cantidad}</p>
-                    <button onClick={agregarProducto} className="btn-agregar">Agregar Producto</button>
+                    <button onClick={agregarProducto} 
+                    disabled={producto.cantidad <= 0}
+                    className="btn-agregar"
+                    > {producto.cantidad <= 0 ? "Sin Stock": "Agregar Producto"}</button>
                 </div>
             )}
         </div>
