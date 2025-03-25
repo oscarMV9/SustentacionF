@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 15px 11%;
+    padding: 15px 2%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,10 +12,21 @@
     box-shadow: 0 0 0px 3px rgb(255, 255, 255);
 }
 
+.material-symbols-outlined {
+    margin-top: 10px;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.material-symbols-outlined:hover {
+    color: #ffffff;
+}
+
 .messaje_title {
     color: #ffffff;
     font-size: 1.5rem;
-    margin: 0;
+    margin-right: 50%;
+
 }
 
 .navbar-nav .cerrar-session {
@@ -51,4 +62,35 @@
 .navbar-nav .boton-dashboard:hover, 
 .navbar-nav .active {
     border-bottom: 2px solid #fff;
+}
+
+.menu-opciones {
+    position: absolute;
+    top: 50px; 
+    width: 20%;
+    left: 10px;
+    margin: 40px;
+    padding: 10px 0px 10px 30px;
+    background-color: rgba(255, 255, 255, 0.829);
+    border: 2px solid #000000;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.menu-item {
+    display: block;
+    padding: 8px 12px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.menu-item:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.title-menu {
+    margin-right: 20px;
 }
