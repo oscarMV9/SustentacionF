@@ -10,6 +10,15 @@ const AllVentas = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
+    // Formateador para pesos colombianos
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0,
+        }).format(value);
+    };
+
     useEffect(() => {
         const fetchVentas = async () => {
             try {
@@ -59,7 +68,7 @@ const AllVentas = () => {
                             <td>{venta.cedula}</td>
                             <td>{venta.correo}</td>
                             <td>{venta.direccion}</td>
-                            <td>${venta.total.toFixed(2)}</td>
+                            <td>{formatCurrency(venta.total)}</td>
                             <td>
                                 <button className="boton-ver-items" onClick={() => navigate(`/ventas/${venta.idVenta}`)}>Ver items</button>
                             </td>

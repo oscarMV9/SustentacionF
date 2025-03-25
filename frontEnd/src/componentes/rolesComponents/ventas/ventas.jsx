@@ -17,6 +17,15 @@ const FormularioVenta = () => {
     const [error, setError] = useState("");
     const [total, setTotal] = useState(0);
 
+    // Formateador para pesos colombianos
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0,
+        }).format(value);
+    };
+
     const calcularTotal = () => {
         const totalVenta = cliente.items.reduce((acc, item) => acc + item.precio * item.cantidadSeleccionada, 0);
         setTotal(totalVenta);
@@ -105,7 +114,7 @@ const FormularioVenta = () => {
                         <input type="text" name="direccion" placeholder="Dirección" value={cliente.direccion} onChange={handleChange} className="input" />
                         {cliente.items.length > 0 && <button type="submit" className="btn-enviar">Confirmar Venta</button>}
                     </form>
-                    <h3 className="total">Total: ${total.toFixed(2)}</h3>
+                    <h3 className="total">Total: {formatCurrency(total)}</h3>
                 </div>
                 <div className="buscador-container">
                     <BuscadorProducto onAgregarProducto={agregarProducto} />
@@ -120,9 +129,9 @@ const FormularioVenta = () => {
                         <div key={index} className="producto-en-venta">
                             <div className="producto-info">
                                 <h3>{prod.nombre}</h3>
-                                <p><strong>Precio:</strong> ${prod.precio}</p>
-                                <p><strong>Categoría:</strong> {prod.categoria_prenda}</p>
-                                <label className="label">Cantidad:</label>
+                                <p><strong>Precio: </strong>{formatCurrency(prod.precio)}</p>
+                                <p><strong>Categoría: </strong> {prod.categoria_prenda}</p>
+                                <label className="label">Cantidad: </label>
                                 <input
                                     type="number"
                                     value={prod.cantidadSeleccionada}

@@ -53,9 +53,9 @@ const BuscadorProducto = ({ onAgregarProducto}) => {
             {producto && (
                 <div className="producto-card">
                     <h3>{producto.nombre}</h3>
-                    <p><strong>Precio:</strong>{producto.precio}</p>
-                    <p><strong>talla:</strong>{producto.talla}</p>
-                    <p><strong>cantidades:</strong>{producto.cantidad}</p>
+                    <p><strong>Precio: </strong>{producto.precio}</p>
+                    <p><strong>talla: </strong>{producto.talla}</p>
+                    <p><strong>cantidades: </strong>{producto.cantidad}</p>
                     <button onClick={agregarProducto} className="btn-agregar">Agregar Producto</button>
                 </div>
             )}

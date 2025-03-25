@@ -2,12 +2,16 @@ from rest_framework import serializers
 from .models import Venta, VentaItem
 
 class VentaItemSerializer(serializers.ModelSerializer):
+    nombre_producto = serializers.SerializerMethodField()
     class Meta:
         model = VentaItem
-        fields = ['producto', 'cantidad', 'precio_unitario']
+        fields = ['producto','nombre_producto','cantidad', 'precio_unitario']
         extra_kwargs = {
             'venta': {'required': False}
         }
+    
+    def get_nombre_producto(self, obj):
+        return obj.producto.idProducto.get_nombre_producto()
 
 class VentaSerializer(serializers.ModelSerializer):
     items = VentaItemSerializer(many=True)
