@@ -11,10 +11,11 @@ class VentaItemSerializer(serializers.ModelSerializer):
 
 class VentaSerializer(serializers.ModelSerializer):
     items = VentaItemSerializer(many=True)
+    total = serializers.ReadOnlyField()
 
     class Meta:
         model = Venta
-        fields = ['nombre_cliente', 'apellido_cliente', 'cedula', 'correo', 'direccion', 'items']
+        fields = ['idVenta','nombre_cliente', 'apellido_cliente', 'cedula', 'correo', 'direccion', 'items', 'total']
 
     def create(self, validated_data):
         items_data = validated_data.pop('items')
