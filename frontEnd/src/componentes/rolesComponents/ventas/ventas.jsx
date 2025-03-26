@@ -46,6 +46,10 @@ const FormularioVenta = () => {
     };
 
     const modificarCantidad = (index, nuevaCantidad) => {
+        if (nuevaCantidad < 1 || nuevaCantidad > cliente.items[index].cantidad) {
+            alert(`segun el producto la cantidad debe estar entre 1 y ${cliente.items[index].cantidad}`);
+            return;
+        }
         const nuevosItems = [...cliente.items];
         nuevosItems[index].cantidadSeleccionada = nuevaCantidad;
         setCliente({ ...cliente, items: nuevosItems });

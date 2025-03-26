@@ -124,9 +124,10 @@
 
 .input-cantidad {
     width: 50px;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-right: 50%;
 }
 
 .producto-info p {
@@ -140,6 +141,11 @@
     margin-top: 20px;
     text-align: right;
     color: #333;
+}
+
+.label {
+    width: 50%;
+    margin-left: 40%;
 }
 
 .btn-agregar {
@@ -181,4 +187,5 @@
     margin-bottom: 15px;
 
 }
+
 

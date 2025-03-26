@@ -28,6 +28,10 @@ body {
     cursor: pointer;
 }
 
+.first-title {
+  color: #fff;
+}
+
 .header-index .logo:hover{
     transform: rotate(-90deg);
     color:#c70239;
