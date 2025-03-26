@@ -84,7 +84,7 @@ class InventarioResource(resources.ModelResource):
 @admin.register(Productos)
 class ProductosAdmin(ImportExportModelAdmin):
     resource_class = ProductosResource
-    list_display = ('id', 'idProducto', 'imagen', 'descripcion', 'precio')
+    list_display = ('id', 'idProducto', 'imagen', 'descripcion', 'precio', 'precio_compra_unitario_de_fabrica')
     search_fields = ('descripcion',)
     actions = [GeneratePDFProductos] 
 
@@ -92,6 +92,6 @@ class ProductosAdmin(ImportExportModelAdmin):
 @admin.register(Inventario)
 class InventarioAdmin(ImportExportModelAdmin):
     resource_class = InventarioResource
-    list_display = ('id', 'idProducto', 'descripcion', f'cantidades')
+    list_display = ('id', 'idProducto', 'descripcion' , 'stock_minimo', 'cantidades', 'stock_maximo','precio_de_fabrica','precio_de_venta','ganancias_totales','categoriaTalla', 'categoriaColor', 'categoriaPrenda', 'categoriaGenero')
     search_fields = ('descripcion',)
     actions = [GeneratePDFInventario] 
