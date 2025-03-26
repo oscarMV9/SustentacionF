@@ -58,6 +58,15 @@ const FormularioVenta = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if(cliente.nombre_cliente || cliente.apellido_cliente) {
+            const regex = /^[a-zA-Z\s]*$/;
+            if (!regex.test(cliente.nombre_cliente) || !regex.test(cliente.apellido_cliente)) {
+                setError("El nombre y apellido solo pueden contener letras.");
+                return;
+            }
+        }
+        
+
         if (cliente.items.length === 0) {
             alert("Debes agregar al menos un producto.");
             return;
@@ -108,7 +117,7 @@ const FormularioVenta = () => {
                     <form onSubmit={handleSubmit} className="formulario">
                         <input type="text" name="nombre_cliente" placeholder="Nombre" value={cliente.nombre_cliente} onChange={handleChange} required className="input" />
                         <input type="text" name="apellido_cliente" placeholder="Apellido" value={cliente.apellido_cliente} onChange={handleChange} required className="input" />
-                        <input type="text" name="cedula" placeholder="Cédula" value={cliente.cedula} onChange={handleChange} required className="input" />
+                        <input type="number" name="cedula" placeholder="Cédula" value={cliente.cedula} onChange={handleChange} required className="input" />
                         <input type="email" name="correo" placeholder="Correo" value={cliente.correo} onChange={handleChange} className="input" />
                         <input type="text" name="direccion" placeholder="Dirección" value={cliente.direccion} onChange={handleChange} className="input" />
                         {cliente.items.length > 0 && <button type="submit" className="btn-enviar">Confirmar Venta</button>}

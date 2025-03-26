@@ -37,6 +37,7 @@ function Dashboard() {
                         apps
                     </span>
                     </a>
+                    <h2 className="messaje_title">{user?.mensaje}</h2>
                 </div>
                 {menu && (
                     <div className="menu-opciones">
@@ -49,7 +50,7 @@ function Dashboard() {
                             <li><Link to="/productos/tallas/XXL" className="menu-item">tallas XXL</Link></li>
                             <li><Link to="/productos/tallas/UNICA" className="menu-item">tallas UNICAS</Link></li>
                         </ul>
-                        <p>Ropa para diferentes generos</p>
+                        <p className="title-menu">Ropa para diferentes generos</p>
                         <ul>
                             <li><Link to="/productos/genero/HOMBRE" className="menu-item">Hombre</Link></li>
                             <li><Link to="/productos/genero/MUJER" className="menu-item">Mujer</Link></li>
@@ -59,7 +60,6 @@ function Dashboard() {
                         </ul>
                     </div>
                 )}
-                <h2 className="messaje_title">{user?.mensaje}</h2>
                 <nav className="navbar-nav">
                     <Link to="/dashboard" className="link-dashboard">
                         <button className="boton-dashboard">Catalogo</button>

@@ -14,6 +14,8 @@
 
 .material-symbols-outlined {
     margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 20px;
     font-size: 35px;
     cursor: pointer;
 }
@@ -25,7 +27,6 @@
 .messaje_title {
     color: #ffffff;
     font-size: 1.5rem;
-    margin-right: 50%;
 
 }
 
@@ -68,10 +69,12 @@
     position: absolute;
     top: 50px; 
     width: 20%;
+    overflow-y: auto;
     left: 10px;
+    max-height: 300px;
     margin: 40px;
     padding: 10px 0px 10px 30px;
-    background-color: rgba(255, 255, 255, 0.829);
+    background-color: rgb(255, 255, 255);
     border: 2px solid #000000;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -91,6 +94,12 @@
     color: #000;
 }
 
+.menu-desplegable {
+    display: flex;
+    align-items: center;
+}
+
 .title-menu {
     margin-right: 20px;
+    color: #d6a622;
 }
