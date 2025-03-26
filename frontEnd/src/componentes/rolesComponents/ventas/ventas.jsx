@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import BuscadorProducto from "./buscador";
 import "../ventas/ventas.css";
 import DashboardVentas from "./dashboardventas";
+import emailjs from '@emailjs/browser';
 
 const FormularioVenta = () => {
     const [cliente, setCliente] = useState({
@@ -92,6 +93,30 @@ const FormularioVenta = () => {
             });
 
             if (!response.ok) throw new Error("Error al enviar la venta");
+
+            const templateParams = {
+                to_email: cliente.correo,
+                nombre_cliente: cliente.nombre_cliente,
+                apellido_cliente: cliente.apellido_cliente,
+                cedula: cliente.cedula,
+                correo: cliente.correo,
+                direccion: cliente.direccion,
+                total: formatCurrency(total),
+                items: cliente.items.map((item) => ({
+                    nombre: item.nombre,
+                    cantidadSeleccionada: item.cantidadSeleccionada,
+                    precio: formatCurrency(item.precio),
+                    subtotal: formatCurrency(item.cantidadSeleccionada * item.precio),
+                })),
+            };
+
+            console.log("Correo destinatario:", cliente.correo);
+            await emailjs.send(
+                "service_85fk8kw",
+                "template_dvsyh7m",
+                templateParams,
+                "8osWTF-iHXKZQiVgz"
+            );
 
             setMensaje("Venta creada con éxito!");
             setCliente({
