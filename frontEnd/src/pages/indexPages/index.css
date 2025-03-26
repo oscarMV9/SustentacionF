@@ -28,6 +28,10 @@ body {
     cursor: pointer;
 }
 
+.first-title {
+  color: #fff;
+}
+
 .header-index .logo:hover{
     transform: rotate(-90deg);
     color:#c70239;
@@ -115,7 +119,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000;
+    background-color: #000000e7;
     transform: translateY(-100%);
     transition: transform 0.7s ease;
     display: flex;
@@ -153,7 +157,7 @@ body {
     height: 100vh;
     top: 0;
     left: 0;
-    color: #292a2d;
+    color: #ffffffa2;
     font-size: 100px;
     letter-spacing: 50px;
     text-transform: uppercase;

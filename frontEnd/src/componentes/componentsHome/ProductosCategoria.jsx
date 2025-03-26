@@ -4,7 +4,7 @@ import Dashboard from "./dashboard";
 import "./productos.css";
 
 const ProductosCategoria = () => {
-    const { categoria, genero } = useParams();
+    const { categoria, genero, talla } = useParams(); 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -13,6 +13,8 @@ const ProductosCategoria = () => {
         let url = `http://localhost:8000/api/productos/${categoria}/`;
         if (genero) {
             url = `http://localhost:8000/api/productos/genero/${genero}/`;
+        } else if (talla) {
+            url = `http://localhost:8000/api/productos/tallas/${talla}/`;
         }
 
         fetch(url)
@@ -32,7 +34,7 @@ const ProductosCategoria = () => {
                 setError("No se pudieron cargar los productos");
                 setLoading(false);
             });
-    }, [categoria, genero]);
+    }, [categoria, genero, talla]);
 
     const agregarCarrito = (producto) => {
         let carrito = JSON.parse(localStorage.getItem("carrito")) || [];

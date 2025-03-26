@@ -8,7 +8,17 @@ const AllVentas = () => {
     const [ventas, setVentas] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [buscarCedula, setBuscarCedula] = useState("");
+    const [buscarCorreo, setBuscarCorreo] = useState("");
     const navigate = useNavigate();
+
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat("es-CO", {
+            style: "currency",
+            currency: "COP",
+            minimumFractionDigits: 0,
+        }).format(value);
+    };
 
     useEffect(() => {
         const fetchVentas = async () => {
@@ -25,6 +35,16 @@ const AllVentas = () => {
         fetchVentas();
     }, []);
 
+    const filtroVentas = ventas.filter((venta) => {
+        const coincideCedula = buscarCedula
+            ? venta.cedula.toString().includes(buscarCedula)
+            : true;
+        const coincideCorreo = buscarCorreo
+            ? venta.correo.toString().includes(buscarCorreo)
+            : true;
+        return coincideCedula && coincideCorreo;
+    });
+
     if (loading) {
         return <h2>Cargando...</h2>;
     }
@@ -35,7 +55,25 @@ const AllVentas = () => {
 
     return (
         <div className="ventas-container">
-            <DashboardVentas/>
+            <DashboardVentas />
+            <div className="search-container">
+                <label>Buscar ventas por Número de cédula</label>
+                <input
+                    type="text"
+                    placeholder="Buscar por número de cédula"
+                    value={buscarCedula}
+                    onChange={(e) => setBuscarCedula(e.target.value)}
+                    className="search-input"
+                />
+                <label>Buscar ventas por Correo</label>
+                <input
+                    type="text"
+                    placeholder="Buscar por correo"
+                    value={buscarCorreo}
+                    onChange={(e) => setBuscarCorreo(e.target.value)}
+                    className="search-input"
+                />
+            </div>
             <h2 className="title-ventas">Ventas Realizadas</h2>
             <table className="ventas-table">
                 <thead>
@@ -51,7 +89,7 @@ const AllVentas = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {ventas.map((venta) => (
+                    {filtroVentas.map((venta) => (
                         <tr key={venta.idVenta}>
                             <td>{venta.idVenta}</td>
                             <td>{venta.nombre_cliente}</td>
@@ -59,9 +97,14 @@ const AllVentas = () => {
                             <td>{venta.cedula}</td>
                             <td>{venta.correo}</td>
                             <td>{venta.direccion}</td>
-                            <td>${venta.total.toFixed(2)}</td>
+                            <td>{formatCurrency(venta.total)}</td>
                             <td>
-                                <button className="boton-ver-items" onClick={() => navigate(`/ventas/${venta.idVenta}`)}>Ver items</button>
+                                <button
+                                    className="boton-ver-items"
+                                    onClick={() => navigate(`/ventas/${venta.idVenta}`)}
+                                >
+                                    Ver items
+                                </button>
                             </td>
                         </tr>
                     ))}

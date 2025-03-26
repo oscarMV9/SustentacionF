@@ -51,7 +51,7 @@ function Index() {
             </header>
             <div className="contenido">
                 <h2><span className="color">Ana</span> Style</h2>
-                <p>Moda fresca <span className="color">para el alcance de todos</span></p>
+                <p className="first-title">Moda fresca <span className="color">para el alcance de todos</span></p>
             </div>
     </body>
     );

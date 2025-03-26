@@ -22,7 +22,7 @@ class CategoriaTalla(models.Model):
 
     def clean(self):
         calzado_tallas = [str(i) for i in range(34, 49)] 
-        tallas_prenda = ['S', 'M', 'L', 'XL', 'XS', 'UNICA'] 
+        tallas_prenda = ['S', 'M', 'L', 'XL', 'XS', 'UNICA', 'BEBES 0-3 M', 'BEBES 3-6 M', 'BEBES 6-9 M', 'BEBES 9-12 M', 'BEBES 12-18', 'BEBES 18-24 M', 'BEBES 24-36 M'] 
 
         if self.tipoTalla == 'CALZADO' and self.talla not in calzado_tallas:
             raise ValidationError("La talla no es válida según el tipo de prenda [Calzado].")

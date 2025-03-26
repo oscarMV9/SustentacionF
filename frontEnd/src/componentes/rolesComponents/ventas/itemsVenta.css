@@ -1,0 +1,55 @@
+
+.items-container {
+    padding: 20px;
+    background-color: #f9f9f99c;
+    border-radius: 8px;
+    border: solid 2px #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10% auto;
+    max-width: 1200px;
+}
+
+.title-items-venta {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    border: none;
+}
+
+.items-table th {
+    background-color: #00000079;
+    color: rgb(255, 255, 255);
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.items-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    border: none;
+    color: #333;
+}
+
+.items-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+.items-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.items-table td:last-child {
+    font-weight: bold;
+    color: #4CAF50;
+}
