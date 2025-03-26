@@ -9,7 +9,6 @@ def enviarCorreoBienvenida(sender, instance, created, **kwargs):
         asunto = 'Bienvenido a AnaStyles'
         destinatarios = [instance.email]
         
-        # Contenido HTML del correo
         html_contenido = f"""
         <!DOCTYPE html>
         <html lang="es">
@@ -95,13 +94,12 @@ def enviarCorreoBienvenida(sender, instance, created, **kwargs):
         </html>
         """
 
-        # Crear el objeto EmailMessage
         email = EmailMessage(
             asunto,
             html_contenido,
-            'anastylesgaes4@gmail.com',  # Remitente
+            'anastylesgaes4@gmail.com',
             destinatarios,
         )
-        email.content_subtype = "html"  # Importante: establecer el tipo de contenido a HTML
+        email.content_subtype = "html"
         email.send()
 
