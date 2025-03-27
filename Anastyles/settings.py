@@ -35,26 +35,26 @@ JAZZMIN_UI_TWEAKS = {
     "footer_small_text": False,
     "body_small_text": False,
     "brand_small_text": False,
-    "brand_colour": "navbar-success",
-    "accent": "accent-teal",
-    "navbar": "navbar-dark",
+    "brand_colour": "navbar-cyan",
+    "accent": "accent-olive",
+    "navbar": "navbar-teal navbar-dark",
     "no_navbar_border": False,
     "navbar_fixed": True,
     "layout_boxed": False,
     "footer_fixed": False,
     "sidebar_fixed": True,
-    "sidebar": "sidebar-dark-olive",
+    "sidebar": "sidebar-dark-lime",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": True,
     "sidebar_nav_compact_style": False,
-    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_legacy_style": True,
     "sidebar_nav_flat_style": True,
-    "theme": "darkly",
+    "theme": "flatly",
     "dark_mode_theme": "darkly",
     "button_classes": {
-        "primary": "btn-primary",
-        "secondary": "btn-secondary",
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
         "info": "btn-info",
         "warning": "btn-outline-warning",
         "danger": "btn-danger",
@@ -170,8 +170,6 @@ EMAIL_USE_TLS = True  # Seguridad TLS
 EMAIL_HOST_USER = 'anastylesgaes4@gmail.com'
 EMAIL_HOST_PASSWORD = 'qophzimkjkawiljv'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-#DEFAULT_FROM_EMAIL = 'tu_correo@gmail.com'  # Dirección de correo predeterminada para el envío
-#qoph zimk jkaw iljv
 
 WSGI_APPLICATION = 'Anastyles.wsgi.application'
 
