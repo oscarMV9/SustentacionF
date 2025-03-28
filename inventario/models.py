@@ -95,4 +95,9 @@ class HistorialEntradaInventario(models.Model):
     inventario = models.ForeignKey(Inventario, on_delete=models.CASCADE)
     cantidad_agregada = models.IntegerField()
     fecha = models.DateTimeField(auto_now_add=True)
+
+class HistorialSalidaInventario(models.Model):
+    inventario = models.ForeignKey(Inventario, on_delete=models.CASCADE, related_name='salidas')
+    cantidad_salida = models.PositiveIntegerField()
+    fecha_salida = models.DateTimeField(auto_now_add=True)
  
