@@ -92,6 +92,6 @@ class ProductosAdmin(ImportExportModelAdmin):
 @admin.register(Inventario)
 class InventarioAdmin(ImportExportModelAdmin):
     resource_class = InventarioResource
-    list_display = ('id', 'idProducto', 'descripcion' ,'nombre_proveedor', 'entradas','stock_minimo', 'cantidades', 'stock_maximo','precio_de_fabrica','precio_de_venta','ganancias_totales','categoriaTalla', 'categoriaColor', 'categoriaPrenda', 'categoriaGenero')
+    list_display = ('id', 'idProducto', 'descripcion' ,'nombre_proveedor','stock_minimo', 'cantidades', 'stock_maximo','precio_de_fabrica','precio_de_venta','ganancias_totales','categoriaTalla', 'categoriaColor', 'categoriaPrenda', 'categoriaGenero')
     search_fields = ('descripcion',)
     actions = [GeneratePDFInventario] 
