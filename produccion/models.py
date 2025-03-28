@@ -17,5 +17,9 @@ class Produccion(models.Model):
         ).exists():
             raise ValidationError("ya hay un registro con estas mismas caracteristicas")
 
+
+    def get_nombre_proveedor(self):
+        return self.nombreProveedor
+
     def __str__(self):
         return f"{self.nombreProducto}"
