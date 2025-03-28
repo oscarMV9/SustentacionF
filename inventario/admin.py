@@ -5,6 +5,7 @@ from reportlab.pdfgen import canvas
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from .models import Productos, Inventario
+from django.contrib import messages
 
 # Función para generar PDF para inventario
 def GeneratePDFInventario(modelAdmin, request, queryset):
@@ -89,9 +90,33 @@ class ProductosAdmin(ImportExportModelAdmin):
     actions = [GeneratePDFProductos] 
 
 
+# @admin.register(Inventario)
+# class InventarioAdmin(ImportExportModelAdmin):
+#     resource_class = InventarioResource
+#     list_display = ('id', 'idProducto', 'descripcion' , 'stock_minimo', 'cantidades', 'stock_maximo','precio_de_fabrica','precio_de_venta','ganancias_totales','categoriaTalla', 'categoriaColor', 'categoriaPrenda', 'categoriaGenero')
+#     search_fields = ('descripcion',)
+#     actions = [GeneratePDFInventario] 
+
 @admin.register(Inventario)
 class InventarioAdmin(ImportExportModelAdmin):
     resource_class = InventarioResource
-    list_display = ('id', 'idProducto', 'descripcion' , 'stock_minimo', 'cantidades', 'stock_maximo','precio_de_fabrica','precio_de_venta','ganancias_totales','categoriaTalla', 'categoriaColor', 'categoriaPrenda', 'categoriaGenero')
+    list_display = ('id', 'idProducto', 'descripcion', 'stock_minimo', 'cantidades', 
+                    'stock_maximo', 'precio_de_fabrica', 'precio_de_venta', 
+                    'ganancias_totales', 'categoriaTalla', 'categoriaColor', 
+                    'categoriaPrenda', 'categoriaGenero', 'alerta_stock')
     search_fields = ('descripcion',)
-    actions = [GeneratePDFInventario] 
+    actions = [GeneratePDFInventario]
+
+    def alerta_stock(self, obj):
+        if obj.cantidades <= obj.stock_minimo + 5:
+            return "⚠️ STOCK BAJO"
+        return "✅ OK"
+    alerta_stock.short_description = 'Alerta'
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        if obj.cantidades <= obj.stock_minimo:
+            messages.warning(
+                request,
+                f'ALERTA: Stock bajo para "{obj.idProducto}" - {obj.cantidades} unidades (Mínimo: {obj.stock_minimo})'
+            )
