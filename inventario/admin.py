@@ -7,7 +7,7 @@ from import_export.admin import ImportExportModelAdmin
 from .models import Productos, Inventario
 from django.contrib import messages
 
-# Función para generar PDF para inventario
+# Funcion para generar PDF para inventario
 def GeneratePDFInventario(modelAdmin, request, queryset):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="Reporte_Inventario.pdf"'
