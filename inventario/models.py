@@ -19,7 +19,7 @@ class Productos(models.Model):
 
     def formatear_precio(self):
         return f"${self.precio:.2f}"
-    
+
   
 class Inventario(models.Model):
     id = models.AutoField(primary_key=True)
@@ -52,8 +52,35 @@ class Inventario(models.Model):
         ).exclude(id=self.id).exists():
             raise ValidationError("el registro ya existe en el inventario")
 
+    def entradas(self):
+        entradas = 0
+        historial = self.historialentradainventario_set.all().order_by('fecha')  
+
+        for entrada in historial:
+            entradas += entrada.cantidad_agregada
+        
+        return entradas
+
+    def save(self, *args, **kwargs):
+        inventario_anterior = None
+        if self.pk:
+            inventario_anterior = Inventario.objects.filter(pk=self.pk).first()
+
+        if inventario_anterior and self.cantidades > inventario_anterior.cantidades:
+            diferencia = self.cantidades - inventario_anterior.cantidades
+            HistorialEntradaInventario.objects.create(
+                inventario=self,
+                cantidad_agregada=diferencia
+            )
+
+        super().save(*args, **kwargs)
+
     def precio_de_venta(self):
         return self.idProducto.precio
+    
+    
+    def nombre_proveedor(self):
+        return self.idProducto.idProducto.get_nombre_proveedor()
 
     def precio_de_fabrica(self):
         return self.idProducto.precio_compra_unitario_de_fabrica
@@ -64,6 +91,8 @@ class Inventario(models.Model):
     def __str__(self):
         return f"{self.descripcion} - {self.idProducto.get_nombre_producto()} - {self.cantidades} unidades"
     
-
-
+class HistorialEntradaInventario(models.Model):
+    inventario = models.ForeignKey(Inventario, on_delete=models.CASCADE)
+    cantidad_agregada = models.IntegerField()
+    fecha = models.DateTimeField(auto_now_add=True)
  
