@@ -88,22 +88,12 @@ class ProductosAdmin(ImportExportModelAdmin):
     list_display = ('id', 'idProducto', 'imagen', 'descripcion', 'precio', 'precio_compra_unitario_de_fabrica')
     search_fields = ('descripcion',)
     actions = [GeneratePDFProductos] 
-
-
-# @admin.register(Inventario)
-# class InventarioAdmin(ImportExportModelAdmin):
-#     resource_class = InventarioResource
-#     list_display = ('id', 'idProducto', 'descripcion' , 'stock_minimo', 'cantidades', 'stock_maximo','precio_de_fabrica','precio_de_venta','ganancias_totales','categoriaTalla', 'categoriaColor', 'categoriaPrenda', 'categoriaGenero')
-#     search_fields = ('descripcion',)
-#     actions = [GeneratePDFInventario] 
+ 
 
 @admin.register(Inventario)
 class InventarioAdmin(ImportExportModelAdmin):
     resource_class = InventarioResource
-    list_display = ('id', 'idProducto', 'descripcion', 'stock_minimo', 'cantidades', 
-                    'stock_maximo', 'precio_de_fabrica', 'precio_de_venta', 
-                    'ganancias_totales', 'categoriaTalla', 'categoriaColor', 
-                    'categoriaPrenda', 'categoriaGenero', 'alerta_stock')
+    list_display = ('id', 'idProducto', 'descripcion' ,'nombre_proveedor','stock_minimo', 'cantidades', 'stock_maximo','precio_de_fabrica','precio_de_venta','ganancias_totales','categoriaTalla', 'categoriaColor', 'categoriaPrenda', 'categoriaGenero', 'alerta_stock')
     search_fields = ('descripcion',)
     actions = [GeneratePDFInventario]
 

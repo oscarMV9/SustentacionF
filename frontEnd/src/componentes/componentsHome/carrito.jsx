@@ -57,7 +57,7 @@ function Carrito() {
                                     <i onClick={() => actualizarCantidad(item.id, item.cantidad + 1)} className="fa-solid fa-plus sumar-cantidad"></i>
                                 </div>
                                 <span className="carrito-item-precio">Precio: ${formatearPrecio(item.precio)}</span>
-                                <p>Talla: {item.talla} | Color: {item.color}</p>
+                                <p className="info-productos">Talla: {item.talla} | Color: {item.color}</p>
                                 <button className="btn-eliminar" onClick={() => eliminarProducto(item.id)}>
                                 <i className="fa-solid fa-trash"></i>
                                 </button>

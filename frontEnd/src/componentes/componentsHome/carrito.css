@@ -10,6 +10,10 @@
     margin: 20%;
     transition: .3s;
 }
+
+.info-productos {
+    color: #e0dbdb;
+}
 .carrito .header-carrito{
     background-color: #353333;
     color: #fff;
@@ -84,6 +88,7 @@
 }
 .carrito .carrito-item .btn-eliminar i{
     pointer-events: none;
+    margin-top: auto;
 }
 
 .carrito-total{

@@ -3,6 +3,7 @@ from produccion.models import Produccion
 from Categorias.models import CategoriaColor, CategoriaGenero, CategoriaPrenda, CategoriaTalla
 from django.core.exceptions import ValidationError
 
+
 class Productos(models.Model):
     id = models.AutoField(primary_key=True)
     idProducto = models.ForeignKey(Produccion, on_delete=models.CASCADE)
@@ -25,7 +26,7 @@ class Inventario(models.Model):
     id = models.AutoField(primary_key=True)
     idProducto = models.ForeignKey(Productos, on_delete=models.CASCADE)
     cantidades = models.IntegerField()
-    stock_minimo = models.IntegerField(default=8)
+    stock_minimo = models.IntegerField(default=10)
     stock_maximo = models.IntegerField(default=500)
     categoriaTalla = models.ForeignKey(CategoriaTalla,on_delete=models.CASCADE)
     categoriaColor = models.ForeignKey(CategoriaColor,on_delete=models.CASCADE)
@@ -51,30 +52,7 @@ class Inventario(models.Model):
             categoriaGenero=self.categoriaGenero,
         ).exclude(id=self.id).exists():
             raise ValidationError("el registro ya existe en el inventario")
-
-    def entradas(self):
-        entradas = 0
-        historial = self.historialentradainventario_set.all().order_by('fecha')  
-
-        for entrada in historial:
-            entradas += entrada.cantidad_agregada
-        
-        return entradas
-
-    def save(self, *args, **kwargs):
-        inventario_anterior = None
-        if self.pk:
-            inventario_anterior = Inventario.objects.filter(pk=self.pk).first()
-
-        if inventario_anterior and self.cantidades > inventario_anterior.cantidades:
-            diferencia = self.cantidades - inventario_anterior.cantidades
-            HistorialEntradaInventario.objects.create(
-                inventario=self,
-                cantidad_agregada=diferencia
-            )
-
-        super().save(*args, **kwargs)
-
+ 
     def precio_de_venta(self):
         return self.idProducto.precio
     
@@ -90,14 +68,4 @@ class Inventario(models.Model):
         
     def __str__(self):
         return f"{self.descripcion} - {self.idProducto.get_nombre_producto()} - {self.cantidades} unidades"
-    
-class HistorialEntradaInventario(models.Model):
-    inventario = models.ForeignKey(Inventario, on_delete=models.CASCADE)
-    cantidad_agregada = models.IntegerField()
-    fecha = models.DateTimeField(auto_now_add=True)
-
-class HistorialSalidaInventario(models.Model):
-    inventario = models.ForeignKey(Inventario, on_delete=models.CASCADE, related_name='salidas')
-    cantidad_salida = models.PositiveIntegerField()
-    fecha_salida = models.DateTimeField(auto_now_add=True)
  
